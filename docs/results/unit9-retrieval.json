@@ -1,0 +1,1052 @@
+{
+  "created_at": "2026-11-16T10:10:35Z",
+  "hardware": {
+    "os": "Darwin",
+    "arch": "arm64",
+    "python": "3.13.12"
+  },
+  "corpus": "sla-deal-desk-v1; 8 bilingual fixture documents",
+  "queries": "24 fixed synthetic held-out queries; no model fine-tuning or threshold tuning on results",
+  "models": {
+    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1": "1427fd652930e4ba29e8149678df786c240d8825"
+  },
+  "summary": {
+    "lexical": {
+      "queries": 24,
+      "top1_accuracy": 0.75,
+      "recall_at3": 1.0,
+      "mrr_at3": 0.8611,
+      "latency_p50_ms": 0.11,
+      "latency_p95_ms": 0.13
+    },
+    "bm25": {
+      "queries": 24,
+      "top1_accuracy": 0.875,
+      "recall_at3": 1.0,
+      "mrr_at3": 0.9236,
+      "latency_p50_ms": 0.28,
+      "latency_p95_ms": 0.33
+    },
+    "hybrid": {
+      "queries": 24,
+      "top1_accuracy": 0.9583,
+      "recall_at3": 1.0,
+      "mrr_at3": 0.9792,
+      "latency_p50_ms": 133.95,
+      "latency_p95_ms": 196.74
+    }
+  },
+  "rows": [
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How quickly must someone first acknowledge a critical Acme complaint?",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 0.61
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Are we promising to fix the problem within an hour?",
+      "expected": "acme-sla",
+      "top3": [
+        "engineer-notes",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 0.13
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "重大客户故障需要多久首次响应？",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "engineer-notes",
+        "inc-104-history"
+      ],
+      "ms": 0.13
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "cross_display",
+      "query": "响应时限",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla"
+      ],
+      "ms": 0.11
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What must engineers collect before blaming the system?",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "acme-sla",
+        "inc-104-runbook",
+        "engineer-notes"
+      ],
+      "ms": 0.13
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "判断故障原因之前需要收集哪些资料？",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "engineer-notes"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "exact_code",
+      "query": "AURORA-PRIVATE-742",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "engineer-notes",
+        "inc-104-runbook",
+        "operating-guide"
+      ],
+      "ms": 0.11
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "ticket_id",
+      "query": "INC-104 logs exclusions",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-history",
+        "inc-104-runbook",
+        "engineer-notes"
+      ],
+      "ms": 0.11
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What time did the customer first report intermittent errors?",
+      "expected": "inc-104-history",
+      "top3": [
+        "inc-104-history",
+        "acme-sla",
+        "engineer-notes"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "Acme 是哪天几点报告故障的？",
+      "expected": "inc-104-history",
+      "top3": [
+        "inc-104-history",
+        "acme-sla",
+        "inc-104-runbook"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "unknowns",
+      "query": "Which facts about the outage remain unresolved?",
+      "expected": "inc-104-history",
+      "top3": [
+        "engineer-notes",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "hypothesis",
+      "query": "Could the maintenance window overlap the disruption?",
+      "expected": "engineer-notes",
+      "top3": [
+        "engineer-notes",
+        "inc-104-runbook",
+        "acme-sla"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Can we treat the requested renewal reduction as a settled price?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 0.11
+    },
+    {
+      "mode": "lexical",
+      "actor": "alex",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "续约优惠已经批准了吗？",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal"
+      ],
+      "ms": 0.1
+    },
+    {
+      "mode": "lexical",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What does Finance need before changing commercial terms?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-sla",
+        "acme-deal"
+      ],
+      "ms": 0.1
+    },
+    {
+      "mode": "lexical",
+      "actor": "alex",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "12 percent renewal discount",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal"
+      ],
+      "ms": 0.09
+    },
+    {
+      "mode": "lexical",
+      "actor": "lin",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Is the credit ceiling enough to establish customer entitlement?",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 0.11
+    },
+    {
+      "mode": "lexical",
+      "actor": "lin",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "服务抵扣上限占月费多少？",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "operating-guide"
+      ],
+      "ms": 0.1
+    },
+    {
+      "mode": "lexical",
+      "actor": "lin",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "5 percent eligible service credit",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 0.1
+    },
+    {
+      "mode": "lexical",
+      "actor": "alex",
+      "language": "en",
+      "category": "controls",
+      "query": "Who must authorize external messages and contract amendments?",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "acme-deal",
+        "acme-sla"
+      ],
+      "ms": 0.1
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "调查时要区分证据、假设和建议吗？",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "inc-104-runbook",
+        "engineer-notes"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "lexical",
+      "actor": "outsider",
+      "language": "en",
+      "category": "tenant",
+      "query": "How long is the response target for this company?",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 0.03
+    },
+    {
+      "mode": "lexical",
+      "actor": "outsider",
+      "language": "en",
+      "category": "exact_code",
+      "query": "OTHER-ORG-SECRET-915",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 0.02
+    },
+    {
+      "mode": "lexical",
+      "actor": "mei",
+      "language": "en",
+      "category": "policy_reference",
+      "query": "initial response target Acme signed contract",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 0.12
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How quickly must someone first acknowledge a critical Acme complaint?",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "operating-guide",
+        "inc-104-runbook"
+      ],
+      "ms": 0.95
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Are we promising to fix the problem within an hour?",
+      "expected": "acme-sla",
+      "top3": [
+        "engineer-notes",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 0.33
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "重大客户故障需要多久首次响应？",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "engineer-notes",
+        "inc-104-history"
+      ],
+      "ms": 0.32
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "cross_display",
+      "query": "响应时限",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla"
+      ],
+      "ms": 0.26
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What must engineers collect before blaming the system?",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "acme-sla",
+        "operating-guide"
+      ],
+      "ms": 0.3
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "判断故障原因之前需要收集哪些资料？",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "engineer-notes"
+      ],
+      "ms": 0.31
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "exact_code",
+      "query": "AURORA-PRIVATE-742",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "engineer-notes",
+        "operating-guide"
+      ],
+      "ms": 0.27
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "ticket_id",
+      "query": "INC-104 logs exclusions",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "inc-104-history",
+        "engineer-notes"
+      ],
+      "ms": 0.28
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What time did the customer first report intermittent errors?",
+      "expected": "inc-104-history",
+      "top3": [
+        "inc-104-history",
+        "acme-sla",
+        "engineer-notes"
+      ],
+      "ms": 0.29
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "Acme 是哪天几点报告故障的？",
+      "expected": "inc-104-history",
+      "top3": [
+        "engineer-notes",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 0.29
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "unknowns",
+      "query": "Which facts about the outage remain unresolved?",
+      "expected": "inc-104-history",
+      "top3": [
+        "engineer-notes",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 0.28
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "hypothesis",
+      "query": "Could the maintenance window overlap the disruption?",
+      "expected": "engineer-notes",
+      "top3": [
+        "engineer-notes",
+        "inc-104-runbook",
+        "acme-sla"
+      ],
+      "ms": 0.28
+    },
+    {
+      "mode": "bm25",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Can we treat the requested renewal reduction as a settled price?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 0.27
+    },
+    {
+      "mode": "bm25",
+      "actor": "alex",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "续约优惠已经批准了吗？",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal"
+      ],
+      "ms": 0.25
+    },
+    {
+      "mode": "bm25",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What does Finance need before changing commercial terms?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "acme-sla"
+      ],
+      "ms": 0.24
+    },
+    {
+      "mode": "bm25",
+      "actor": "alex",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "12 percent renewal discount",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal"
+      ],
+      "ms": 0.22
+    },
+    {
+      "mode": "bm25",
+      "actor": "lin",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Is the credit ceiling enough to establish customer entitlement?",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 0.26
+    },
+    {
+      "mode": "bm25",
+      "actor": "lin",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "服务抵扣上限占月费多少？",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "operating-guide"
+      ],
+      "ms": 0.26
+    },
+    {
+      "mode": "bm25",
+      "actor": "lin",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "5 percent eligible service credit",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "inc-104-history",
+        "operating-guide"
+      ],
+      "ms": 0.25
+    },
+    {
+      "mode": "bm25",
+      "actor": "alex",
+      "language": "en",
+      "category": "controls",
+      "query": "Who must authorize external messages and contract amendments?",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "acme-deal",
+        "acme-sla"
+      ],
+      "ms": 0.25
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "调查时要区分证据、假设和建议吗？",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "engineer-notes",
+        "inc-104-runbook"
+      ],
+      "ms": 0.3
+    },
+    {
+      "mode": "bm25",
+      "actor": "outsider",
+      "language": "en",
+      "category": "tenant",
+      "query": "How long is the response target for this company?",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 0.09
+    },
+    {
+      "mode": "bm25",
+      "actor": "outsider",
+      "language": "en",
+      "category": "exact_code",
+      "query": "OTHER-ORG-SECRET-915",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 0.07
+    },
+    {
+      "mode": "bm25",
+      "actor": "mei",
+      "language": "en",
+      "category": "policy_reference",
+      "query": "initial response target Acme signed contract",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "operating-guide"
+      ],
+      "ms": 0.28
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How quickly must someone first acknowledge a critical Acme complaint?",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-runbook",
+        "inc-104-history"
+      ],
+      "ms": 564.91
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Are we promising to fix the problem within an hour?",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "engineer-notes"
+      ],
+      "ms": 133.95
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "重大客户故障需要多久首次响应？",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 156.85
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "cross_display",
+      "query": "响应时限",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "engineer-notes"
+      ],
+      "ms": 116.2
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What must engineers collect before blaming the system?",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "engineer-notes",
+        "inc-104-history"
+      ],
+      "ms": 127.86
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "判断故障原因之前需要收集哪些资料？",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "engineer-notes",
+        "acme-sla"
+      ],
+      "ms": 157.9
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "exact_code",
+      "query": "AURORA-PRIVATE-742",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "operating-guide",
+        "acme-sla"
+      ],
+      "ms": 182.16
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "ticket_id",
+      "query": "INC-104 logs exclusions",
+      "expected": "inc-104-runbook",
+      "top3": [
+        "inc-104-runbook",
+        "inc-104-history",
+        "engineer-notes"
+      ],
+      "ms": 123.41
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What time did the customer first report intermittent errors?",
+      "expected": "inc-104-history",
+      "top3": [
+        "inc-104-history",
+        "acme-sla",
+        "engineer-notes"
+      ],
+      "ms": 151.76
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "Acme 是哪天几点报告故障的？",
+      "expected": "inc-104-history",
+      "top3": [
+        "inc-104-history",
+        "acme-sla",
+        "engineer-notes"
+      ],
+      "ms": 150.23
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "unknowns",
+      "query": "Which facts about the outage remain unresolved?",
+      "expected": "inc-104-history",
+      "top3": [
+        "engineer-notes",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 156.61
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "hypothesis",
+      "query": "Could the maintenance window overlap the disruption?",
+      "expected": "engineer-notes",
+      "top3": [
+        "engineer-notes",
+        "inc-104-runbook",
+        "inc-104-history"
+      ],
+      "ms": 196.74
+    },
+    {
+      "mode": "hybrid",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Can we treat the requested renewal reduction as a settled price?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 166.58
+    },
+    {
+      "mode": "hybrid",
+      "actor": "alex",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "续约优惠已经批准了吗？",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "inc-104-history",
+        "acme-sla"
+      ],
+      "ms": 112.26
+    },
+    {
+      "mode": "hybrid",
+      "actor": "alex",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What does Finance need before changing commercial terms?",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "acme-sla"
+      ],
+      "ms": 93.07
+    },
+    {
+      "mode": "hybrid",
+      "actor": "alex",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "12 percent renewal discount",
+      "expected": "acme-deal",
+      "top3": [
+        "acme-deal",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 113.54
+    },
+    {
+      "mode": "hybrid",
+      "actor": "lin",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Is the credit ceiling enough to establish customer entitlement?",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "acme-sla",
+        "inc-104-history"
+      ],
+      "ms": 131.67
+    },
+    {
+      "mode": "hybrid",
+      "actor": "lin",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "服务抵扣上限占月费多少？",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "acme-sla",
+        "operating-guide"
+      ],
+      "ms": 103.54
+    },
+    {
+      "mode": "hybrid",
+      "actor": "lin",
+      "language": "en",
+      "category": "exact_terms",
+      "query": "5 percent eligible service credit",
+      "expected": "credit-policy",
+      "top3": [
+        "credit-policy",
+        "acme-sla",
+        "operating-guide"
+      ],
+      "ms": 113.59
+    },
+    {
+      "mode": "hybrid",
+      "actor": "alex",
+      "language": "en",
+      "category": "controls",
+      "query": "Who must authorize external messages and contract amendments?",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "acme-deal",
+        "acme-sla"
+      ],
+      "ms": 125.09
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "zh",
+      "category": "bilingual",
+      "query": "调查时要区分证据、假设和建议吗？",
+      "expected": "operating-guide",
+      "top3": [
+        "operating-guide",
+        "engineer-notes",
+        "acme-sla"
+      ],
+      "ms": 137.86
+    },
+    {
+      "mode": "hybrid",
+      "actor": "outsider",
+      "language": "en",
+      "category": "tenant",
+      "query": "How long is the response target for this company?",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 50.32
+    },
+    {
+      "mode": "hybrid",
+      "actor": "outsider",
+      "language": "en",
+      "category": "exact_code",
+      "query": "OTHER-ORG-SECRET-915",
+      "expected": "other-account-policy",
+      "top3": [
+        "other-account-policy"
+      ],
+      "ms": 37.24
+    },
+    {
+      "mode": "hybrid",
+      "actor": "mei",
+      "language": "en",
+      "category": "policy_reference",
+      "query": "initial response target Acme signed contract",
+      "expected": "acme-sla",
+      "top3": [
+        "acme-sla",
+        "inc-104-history",
+        "inc-104-runbook"
+      ],
+      "ms": 177.65
+    }
+  ],
+  "limits": [
+    "Small synthetic corpus; no production retrieval or live-model task-success claim.",
+    "Embedding latency includes per-query encoding of authorized fixture chunks; database mode caches version-bound embeddings.",
+    "Missing factual policy revisions are validated separately in integration tests; this corpus is not a 60-case business evaluation."
+  ],
+  "reproducibility": {
+    "corpus_sha256": "2e48b35bbd7e623c9939b85eec9faae1716c86022d516f755bb39ed14d7dba28",
+    "queries_sha256": "28c768f6882ae962517ae9d67ca13826fcae74bd44a00855d82283c7fcd627e8",
+    "implementation_sha256": {
+      "/Users/jang/Documents/GitHub/rag_nanoProject/scripts/unit9_retrieval_eval.py": "7c84c729188c06f0f455d6355b1f1d597feb1267dd380bcae2d7953f24ff089d",
+      "work_assistant/knowledge.py": "e618ebd58caefc3373b88d4ed5ad6f12d06a396558c3f18fe3923b894a5ad491",
+      "work_assistant/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "work_assistant/retrieval/index.py": "657f89a61162b57e23c5b40d067841036529a23ffa45a0d8db40315681839111",
+      "work_assistant/retrieval/ingestion.py": "bbdeb6a953072c30bd419c4334efdcdb9afe8343b60be198174b5d83d2476030",
+      "work_assistant/retrieval/search.py": "338ce332feeddf4fc4520e3f482a87dde4b49ab473c7c77ba5e5fd1274f3c0f7"
+    },
+    "dependencies": {
+      "numpy": "2.5.5",
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "5.7.0",
+      "transformers": "5.23.0",
+      "torch": "2.15.0"
+    },
+    "configuration": {
+      "device": "cpu",
+      "torch_threads": 2,
+      "dense_min_cosine": 0.25,
+      "rrf_constant": 60,
+      "branch_candidates": 40,
+      "rerank_candidates": 30
+    },
+    "timing": "One pass per mode; local model loading excluded, query and authorized document encoding included. No variance estimate."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "scenario": "200 real loopback HTTP submissions; 16 submitter threads; API stopped before worker drain; two independent worker processes",
+  "created_at": "2026-11-16T04:43:35Z",
+  "hardware": {
+    "os": "Darwin",
+    "architecture": "arm64",
+    "logical_cpus": 10,
+    "python": "3.13.12",
+    "postgresql": "17.12 (Debian 17.12-1.pgdg13+1)"
+  },
+  "limits": {
+    "active_total": 60,
+    "active_per_tenant": 40,
+    "workers_per_tenant": 1,
+    "worker_processes": 2,
+    "slots_per_process": 1
+  },
+  "submitted": 200,
+  "accepted": 60,
+  "explicit_429": 140,
+  "unexpected_statuses": 0,
+  "intake_seconds": 0.743,
+  "intake_p50_ms": 41.94,
+  "intake_p95_ms": 159.91,
+  "drain_seconds_including_process_start": 1.658,
+  "delivery_attempts": 60,
+  "lost_accepted": 0,
+  "duplicate_effects": 0,
+  "effects_expected": 0,
+  "outcomes": {
+    "waiting_for_approval": 16,
+    "waiting_for_input": 44
+  },
+  "queue_wait_p95_ms": 2052,
+  "workers_used": 2,
+  "caveats": [
+    "Synthetic records and local PostgreSQL; no live model or external provider calls.",
+    "Measures intake and dispatch to human waits, not financial execution throughput or production capacity."
+  ]
+}

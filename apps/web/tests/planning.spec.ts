@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('specialist plan and claim checks survive reload and remain private', async ({page}) => {
+  test.skip(process.env.UI_STRUCTURED_MODEL !== '1', 'Requires the structured provider test server');
+  await page.goto('/');
+  await expect(page.getByRole('combobox', {name:'Investigation mode'})).toHaveValue('supervisor');
+  await page.getByRole('button',{name:'New conversation',exact:true}).click();
+  await page.getByRole('textbox',{name:'Ask your assistant'}).fill('What is the Acme response target?');
+  await page.getByRole('button',{name:'Send question'}).click();
+  await expect(page.locator('.answer-text')).toContainText('60 minutes');
+  await page.locator('.trace summary').click();
+  await expect(page.locator('.agent-plan')).toContainText('knowledge');
+  await expect(page.locator('.agent-plan')).toContainText('critic');
+  await expect(page.locator('.agent-plan')).toContainText('Supported / checked claims');
+  await page.reload();
+  await page.locator('.trace summary').click();
+  await expect(page.locator('.agent-plan')).toContainText('Revision 1');
+  await page.screenshot({path:'/tmp/northstar-unit10-plan.png',fullPage:true});
+  await page.getByRole('button',{name:'New conversation',exact:true}).click();
+  await page.getByRole('combobox',{name:'Investigation mode'}).selectOption('single');
+  await page.getByRole('textbox',{name:'Ask your assistant'}).fill('What is the Acme response target?');
+  await page.getByRole('button',{name:'Send question'}).click();
+  await expect(page.locator('.answer-text')).toContainText('60 minutes');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.getByRole('button',{name:'中文',exact:true}).click();
+  await page.setViewportSize({width:390,height:844});
+  await expect(page.getByRole('combobox',{name:'调查模式'})).toHaveValue('single');
+  await expect(page.locator('.answer-text')).toContainText('60');
+  expect(await page.locator('.sidebar').evaluate(el=>el.getBoundingClientRect().right)).toBeLessThanOrEqual(0);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:'/tmp/northstar-unit10-mobile.png',fullPage:true});
+});

@@ -1,0 +1,38 @@
+[project]
+name = "b2b-sla-escalation-deal-desk-agent"
+version = "0.1.0"
+description = "SLA escalation and commercial deal desk assistant"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.30,<1",
+    "google-genai>=2.33.0",
+    "python-dotenv>=1.2.4",
+    "anyio>=4,<5",
+    "httpx>=0.27,<1",
+    "python-docx>=1.1,<2",
+    "openpyxl>=3.1,<4",
+    "python-pptx>=1.0,<2",
+    "reportlab>=4,<5",
+    "sqlalchemy>=2.0,<3",
+    "alembic>=1.14,<2",
+    "psycopg[binary,pool]>=3.2,<4",
+    "langgraph>=1,<2",
+    "langgraph-checkpoint-postgres>=3,<4",
+    "rank-bm25==0.2.2",
+    "pypdf>=5,<7",
+    "pyjwt[crypto]>=2.12,<3",
+]
+
+[project.optional-dependencies]
+retrieval = [
+    "sentence-transformers>=3,<6",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
