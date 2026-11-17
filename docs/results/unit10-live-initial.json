@@ -1,0 +1,5970 @@
+{
+  "created_at": "2026-11-16T15:07:08.961116+00:00",
+  "model": "gemini-3.5-flash-lite",
+  "prompt_version": "case-collaboration-v1",
+  "pricing_version": "google-standard-text-2026-11-16",
+  "cost_cap_usd": "0.50",
+  "known_estimated_cost_usd": "0.05796087",
+  "unknown_usage": false,
+  "provider_calls": 66,
+  "repeats": 2,
+  "rows": [
+    {
+      "case": "response_target",
+      "mode": "single",
+      "repeat": 0,
+      "passed": true,
+      "duration_ms": 8110,
+      "response": {
+        "status": "answered",
+        "answer": "Acme's initial response target is 60 minutes for a priority-one escalation.\n\nA response deadline is not a resolution promise.",
+        "sources": [
+          {
+            "id": "acme-sla",
+            "project_id": "acme",
+            "title": "Acme SLA terms",
+            "content": "Acme is a fictional Gold-tier customer. The initial response target is 60 minutes for a priority-one escalation. Mei Chen coordinates technical investigation and Alex Wang coordinates the account. A response deadline is not a resolution promise. The signed contract must be checked before calculating any credit.",
+            "language": "en",
+            "version": 2,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/acme-sla?language=en"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 60,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          },
+          {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 14,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 4,
+        "tool_calls": 2,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single",
+            "critic"
+          ]
+        },
+        "verification": {
+          "checked_claims": 2,
+          "supported_claims": 2,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 0,
+          "claims": [
+            {
+              "kind": "fact",
+              "text": "Acme's initial response target is 60 minutes for a priority-one escalation.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "The initial response target is 60 minutes for a priority-one escalation."
+                }
+              ]
+            },
+            {
+              "kind": "fact",
+              "text": "A response deadline is not a resolution promise.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "A response deadline is not a resolution promise."
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 4,
+          "tool_calls": 2,
+          "input_bytes": 34111,
+          "token_reservation": 42303,
+          "reported_tokens": 8526,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 8102,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8868,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8868,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2520,
+            "usage": {
+              "candidates_token_count": 57,
+              "prompt_token_count": 1972,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1972
+                }
+              ],
+              "total_token_count": 2029
+            },
+            "cost_usd": "0.0007341",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 21,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 60,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10560,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10560,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1951,
+            "usage": {
+              "candidates_token_count": 56,
+              "prompt_token_count": 2642,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2642
+                }
+              ],
+              "total_token_count": 2698
+            },
+            "cost_usd": "0.0009326",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 14,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11183,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11183,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2008,
+            "usage": {
+              "candidates_token_count": 238,
+              "prompt_token_count": 2823,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2823
+                }
+              ],
+              "total_token_count": 3061
+            },
+            "cost_usd": "0.0014419",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "acme-sla"
+            ],
+            "status": "complete",
+            "claim_count": 2
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3500,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3500,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1439,
+            "usage": {
+              "candidates_token_count": 112,
+              "prompt_token_count": 626,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 626
+                }
+              ],
+              "total_token_count": 738
+            },
+            "cost_usd": "0.0004678",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 2,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "sla_proposal",
+      "mode": "single",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 8918,
+      "response": {
+        "status": "answered",
+        "answer": "Unknown: Data classification indicates incident fields are human attestations, not independently verified.",
+        "sources": [
+          {
+            "id": "case:INC-105",
+            "project_id": null,
+            "title": "SLA case INC-105",
+            "content": "{\n  \"account\": {\n    \"contact_email\": \"owner@acme.example\",\n    \"contact_name\": \"Demo account owner\",\n    \"id\": \"acme\",\n    \"name\": \"Acme\",\n    \"organization_id\": \"northstar\",\n    \"version\": 1\n  },\n  \"calculation\": {\n    \"approval_required\": true,\n    \"calendar\": \"24x7 elapsed time; UTC calendar-month billing\",\n    \"contract_version\": 1,\n    \"currency\": \"USD\",\n    \"eligibility_confirmed\": true,\n    \"eligible_minutes\": \"90\",\n    \"excluded_minutes\": \"30\",\n    \"execution_status\": \"not_executed\",\n    \"formula\": \"min(monthly_fee × eligible_minutes × rate, max(0, monthly_fee × cap - prior_credit_amount))\",\n    \"formula_version\": \"sla-minute-v1\",\n    \"missing_inputs\": [],\n    \"monthly_cap\": \"50.00\",\n    \"policy_id\": \"acme-gold-v1\",\n    \"policy_version\": 1,\n    \"proposal_amount\": \"45.00\",\n    \"raw_amount\": \"45.0000000000\",\n    \"reason\": \"eligible_input_confirmed\",\n    \"remaining_cap\": \"50.00\",\n    \"response_deadline\": \"2026-11-14T02:00:00+00:00\",\n    \"response_status\": \"met\",\n    \"rounding\": \"ROUND_HALF_UP, 2 decimal places\",\n    \"status\": \"calculated\",\n    \"ticket_version\": 1,\n    \"total_minutes\": \"120\"\n  },\n  \"contract\": {\n    \"account_id\": \"acme\",\n    \"currency\": \"USD\",\n    \"ends_at\": \"2027-01-01T00:00:00Z\",\n    \"id\": \"acme-2026\",\n    \"monthly_fee\": \"1000.00\",\n    \"organization_id\": \"northstar\",\n    \"policy_id\": \"acme-gold-v1\",\n    \"signed\": true,\n    \"starts_at\": \"2026-01-01T00:00:00Z\",\n    \"version\": 1\n  },\n  \"data_classification\": \"fictional_demo; incident fields are human attestations, not independently verified\",\n  \"overlapping_ticket_ids\": [],\n  \"policy\": {\n    \"credit_rate_per_minute\": \"0.00050000\",\n    \"effective_from\": \"2026-01-01T00:00:00Z\",\n    \"effective_until\": \"2027-01-01T00:00:00Z\",\n    \"id\": \"acme-gold-v1\",\n    \"monthly_cap_fraction\": \"0.05000\",\n    \"name\": \"Fictional P1 credit policy\",\n    \"organization_id\": \"northstar\",\n    \"response_minutes\": 60,\n    \"version\": 1\n  },\n  \"provenance\": [\n    {\n      \"id\": \"INC-105\",\n      \"type\": \"ticket\",\n      \"version\": 1\n    },\n    {\n      \"id\": \"acme\",\n      \"type\": \"account\",\n      \"version\": 1\n    },\n    {\n      \"id\": \"acme-2026\",\n      \"type\": \"contract\",\n      \"version\": 1\n    },\n    {\n      \"id\": \"acme-gold-v1\",\n      \"type\": \"policy\",\n      \"version\": 1\n    }\n  ],\n  \"ticket\": {\n    \"assignee_id\": \"mei\",\n    \"billing_period_end\": \"2026-12-01T00:00:00Z\",\n    \"billing_period_start\": \"2026-11-01T00:00:00Z\",\n    \"contract_id\": \"acme-2026\",\n    \"eligibility_confirmed\": true,\n    \"evidence_note\": \"Synthetic support attestation: 120 minutes, 30 minutes maintenance excluded, no prior monthly credit. Not production evidence.\",\n    \"exclusions\": [\n      {\n        \"end\": \"2026-11-14T09:30:00+08:00\",\n        \"start\": \"2026-11-14T09:00:00+08:00\"\n      }\n    ],\n    \"first_response_at\": \"2026-11-14T01:30:00Z\",\n    \"id\": \"INC-105\",\n    \"incident_ended_at\": \"2026-11-14T03:00:00Z\",\n    \"incident_started_at\": \"2026-11-14T01:00:00Z\",\n    \"organization_id\": \"northstar\",\n    \"prior_credit_amount\": \"0.00\",\n    \"reported_at\": \"2026-11-14T01:00:00Z\",\n    \"severity\": \"P1\",\n    \"status\": \"investigating\",\n    \"title\": \"Sandbox calculation example\",\n    \"updated_at\": \"2026-11-15T01:00:00Z\",\n    \"version\": 1\n  }\n}",
+            "language": "en",
+            "version": 1,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/case:INC-105?language=en"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "calculate_sla_impact",
+            "outcome": "ok",
+            "document_ids": [
+              "case:INC-105"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 12,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 5,
+        "tool_calls": 1,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single",
+            "critic"
+          ]
+        },
+        "verification": {
+          "checked_claims": 1,
+          "supported_claims": 1,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 1,
+          "claims": [
+            {
+              "kind": "unknown",
+              "text": "Data classification indicates incident fields are human attestations, not independently verified.",
+              "evidence": [
+                {
+                  "source_id": "case:INC-105",
+                  "version": 1,
+                  "quote": "\"data_classification\": \"fictional_demo; incident fields are human attestations, not independently verified\""
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 5,
+          "tool_calls": 1,
+          "input_bytes": 34968,
+          "token_reservation": 45208,
+          "reported_tokens": 9383,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 1,
+          "elapsed_ms": 8909,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8898,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8898,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1761,
+            "usage": {
+              "candidates_token_count": 59,
+              "prompt_token_count": 1982,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1982
+                }
+              ],
+              "total_token_count": 2041
+            },
+            "cost_usd": "0.0007421",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "calculate_sla_impact",
+            "outcome": "ok",
+            "document_ids": [
+              "case:INC-105"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 12,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 12853,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 12853,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2131,
+            "usage": {
+              "candidates_token_count": 162,
+              "prompt_token_count": 3568,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 3568
+                }
+              ],
+              "total_token_count": 3730
+            },
+            "cost_usd": "0.0014754",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "case:INC-105"
+            ],
+            "status": "complete",
+            "claim_count": 1
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3134,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3134,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1367,
+            "usage": {
+              "candidates_token_count": 85,
+              "prompt_token_count": 659,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 659
+                }
+              ],
+              "total_token_count": 744
+            },
+            "cost_usd": "0.0004102",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6739,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6739,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2223,
+            "usage": {
+              "candidates_token_count": 182,
+              "prompt_token_count": 1883,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1883
+                }
+              ],
+              "total_token_count": 2065
+            },
+            "cost_usd": "0.0010199",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3344,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3344,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1285,
+            "usage": {
+              "candidates_token_count": 67,
+              "prompt_token_count": 736,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 736
+                }
+              ],
+              "total_token_count": 803
+            },
+            "cost_usd": "0.0003883",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 1,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "deal_proposal",
+      "mode": "single",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 13172,
+      "response": {
+        "status": "budget_exceeded",
+        "answer": "Investigation reached its shared budget. Review saved work and narrow the request.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "get_deal",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 12,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          },
+          {
+            "tool": "calculate_deal_terms",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 7,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 7,
+        "tool_calls": 2,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single"
+          ]
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 7,
+          "tool_calls": 2,
+          "input_bytes": 50246,
+          "token_reservation": 64582,
+          "reported_tokens": 14578,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 2,
+          "elapsed_ms": 13164,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8895,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8895,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2089,
+            "usage": {
+              "candidates_token_count": 100,
+              "prompt_token_count": 1980,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1980
+                }
+              ],
+              "total_token_count": 2080
+            },
+            "cost_usd": "0.000844",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "get_deal",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 12,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "calculate_deal_terms",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 7,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 15711,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 15711,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2107,
+            "usage": {
+              "candidates_token_count": 244,
+              "prompt_token_count": 4688,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 4688
+                }
+              ],
+              "total_token_count": 4932
+            },
+            "cost_usd": "0.0020164",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "deal:DEAL-101"
+            ],
+            "status": "complete",
+            "claim_count": 1
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3995,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3995,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1466,
+            "usage": {
+              "candidates_token_count": 57,
+              "prompt_token_count": 1029,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1029
+                }
+              ],
+              "total_token_count": 1086
+            },
+            "cost_usd": "0.0004512",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6371,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6371,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2442,
+            "usage": {
+              "candidates_token_count": 232,
+              "prompt_token_count": 1718,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1718
+                }
+              ],
+              "total_token_count": 1950
+            },
+            "cost_usd": "0.0010954",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3996,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3996,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1235,
+            "usage": {
+              "candidates_token_count": 75,
+              "prompt_token_count": 1032,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1032
+                }
+              ],
+              "total_token_count": 1107
+            },
+            "cost_usd": "0.0004971",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              },
+              {
+                "index": 0,
+                "code": "uncertain"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 2
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6581,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6581,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2351,
+            "usage": {
+              "candidates_token_count": 267,
+              "prompt_token_count": 1770,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1770
+                }
+              ],
+              "total_token_count": 2037
+            },
+            "cost_usd": "0.0011985",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4697,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4697,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1296,
+            "usage": {
+              "candidates_token_count": 89,
+              "prompt_token_count": 1297,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1297
+                }
+              ],
+              "total_token_count": 1386
+            },
+            "cost_usd": "0.0006116",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "budget",
+            "budget": {
+              "model_calls": 7,
+              "tool_calls": 2,
+              "input_bytes": 50246,
+              "token_reservation": 64582,
+              "reported_tokens": 14578,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 2,
+              "elapsed_ms": 13161,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "bilingual_target",
+      "mode": "single",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 4303,
+      "response": {
+        "status": "invalid_response",
+        "answer": "调查已安全停止。重试前请检查当前来源及已保存的草稿或工作流。",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 33,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 2,
+        "tool_calls": 1,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "input_bytes": 19428,
+          "token_reservation": 23524,
+          "reported_tokens": 4943,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 4287,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8874,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8874,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1948,
+            "usage": {
+              "candidates_token_count": 60,
+              "prompt_token_count": 1977,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1977
+                }
+              ],
+              "total_token_count": 2037
+            },
+            "cost_usd": "0.0007431",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 28,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 33,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10554,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10554,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2267,
+            "usage": {
+              "candidates_token_count": 234,
+              "prompt_token_count": 2672,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2672
+                }
+              ],
+              "total_token_count": 2906
+            },
+            "cost_usd": "0.0013866",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 1,
+              "input_bytes": 19428,
+              "token_reservation": 23524,
+              "reported_tokens": 4943,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 0,
+              "elapsed_ms": 4283,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "response_target",
+      "mode": "supervisor",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 4913,
+      "response": {
+        "status": "invalid_response",
+        "answer": "The investigation stopped safely. Review current sources and any saved draft or workflow before retrying.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [],
+        "model_calls": 2,
+        "tool_calls": 0,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 0,
+          "input_bytes": 9340,
+          "token_reservation": 13436,
+          "reported_tokens": 2073,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 1,
+          "elapsed_ms": 4906,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4627,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4627,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2398,
+            "usage": {
+              "candidates_token_count": 274,
+              "prompt_token_count": 764,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 764
+                }
+              ],
+              "total_token_count": 1038
+            },
+            "cost_usd": "0.0009142",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4627,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4713,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4713,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2471,
+            "usage": {
+              "candidates_token_count": 253,
+              "prompt_token_count": 782,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 782
+                }
+              ],
+              "total_token_count": 1035
+            },
+            "cost_usd": "0.0008671",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4713,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 0,
+              "input_bytes": 9340,
+              "token_reservation": 13436,
+              "reported_tokens": 2073,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 1,
+              "elapsed_ms": 4903,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "sla_proposal",
+      "mode": "supervisor",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 11123,
+      "response": {
+        "status": "budget_exceeded",
+        "answer": "Investigation reached its shared budget. Review saved work and narrow the request.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "inc-104-history",
+              "acme-sla",
+              "inc-104-runbook",
+              "engineer-notes",
+              "operating-guide"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 30,
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1
+          },
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "inc-104-history",
+              "engineer-notes",
+              "inc-104-runbook"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 20,
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 5,
+        "tool_calls": 2,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [
+            {
+              "id": "know_1",
+              "role": "knowledge",
+              "dependencies": [],
+              "status": "pending"
+            },
+            {
+              "id": "ana_1",
+              "role": "analyst",
+              "dependencies": [
+                "know_1"
+              ],
+              "status": "pending"
+            },
+            {
+              "id": "crit_1",
+              "role": "critic",
+              "dependencies": [
+                "ana_1"
+              ],
+              "status": "pending"
+            }
+          ],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 5,
+          "tool_calls": 2,
+          "input_bytes": 25363,
+          "token_reservation": 35603,
+          "reported_tokens": 5609,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 2,
+          "elapsed_ms": 11115,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2609,
+            "usage": {
+              "candidates_token_count": 389,
+              "prompt_token_count": 790,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 790
+                }
+              ],
+              "total_token_count": 1179
+            },
+            "cost_usd": "0.0012095",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4782,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4782,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2361,
+            "usage": {
+              "candidates_token_count": 276,
+              "prompt_token_count": 808,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 808
+                }
+              ],
+              "total_token_count": 1084
+            },
+            "cost_usd": "0.0009324",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "plan_validated",
+          "payload": {
+            "revision": 1,
+            "nodes": 3,
+            "roles": [
+              "knowledge",
+              "analyst",
+              "critic"
+            ],
+            "decision": "execute",
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "know_1",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3891,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3891,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1942,
+            "usage": {
+              "candidates_token_count": 57,
+              "prompt_token_count": 472,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 472
+                }
+              ],
+              "total_token_count": 529
+            },
+            "cost_usd": "0.0002841",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 5,
+            "duration_ms": 26,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "inc-104-history",
+              "acme-sla",
+              "inc-104-runbook",
+              "engineer-notes",
+              "operating-guide"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 30,
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5956,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5956,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1941,
+            "usage": {
+              "candidates_token_count": 156,
+              "prompt_token_count": 1294,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1294
+                }
+              ],
+              "total_token_count": 1450
+            },
+            "cost_usd": "0.0007782",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5956,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6038,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6038,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2133,
+            "usage": {
+              "candidates_token_count": 55,
+              "prompt_token_count": 1312,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1312
+                }
+              ],
+              "total_token_count": 1367
+            },
+            "cost_usd": "0.0005311",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 3,
+            "duration_ms": 16,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "inc-104-history",
+              "engineer-notes",
+              "inc-104-runbook"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 20,
+            "role": "knowledge",
+            "node_id": "know_1",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "budget",
+            "budget": {
+              "model_calls": 5,
+              "tool_calls": 2,
+              "input_bytes": 25363,
+              "token_reservation": 35603,
+              "reported_tokens": 5609,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 2,
+              "elapsed_ms": 11113,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "deal_proposal",
+      "mode": "supervisor",
+      "repeat": 0,
+      "passed": false,
+      "duration_ms": 5167,
+      "response": {
+        "status": "invalid_response",
+        "answer": "The investigation stopped safely. Review current sources and any saved draft or workflow before retrying.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [],
+        "model_calls": 2,
+        "tool_calls": 0,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 0,
+          "input_bytes": 9468,
+          "token_reservation": 13564,
+          "reported_tokens": 2400,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 1,
+          "elapsed_ms": 5161,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2415,
+            "usage": {
+              "candidates_token_count": 425,
+              "prompt_token_count": 787,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 787
+                }
+              ],
+              "total_token_count": 1212
+            },
+            "cost_usd": "0.0012986",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2696,
+            "usage": {
+              "candidates_token_count": 383,
+              "prompt_token_count": 805,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 805
+                }
+              ],
+              "total_token_count": 1188
+            },
+            "cost_usd": "0.001199",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 0,
+              "input_bytes": 9468,
+              "token_reservation": 13564,
+              "reported_tokens": 2400,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 1,
+              "elapsed_ms": 5159,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "bilingual_target",
+      "mode": "supervisor",
+      "repeat": 0,
+      "passed": true,
+      "duration_ms": 10569,
+      "response": {
+        "status": "answered",
+        "answer": "Acme 一级升级事件的首次响应时限为 60 分钟。\n\n首次响应时限不是解决承诺。",
+        "sources": [
+          {
+            "id": "acme-sla",
+            "project_id": "acme",
+            "title": "Acme SLA 条款",
+            "content": "Acme 是虚构的金牌客户。一级升级事件的首次响应时限为 60 分钟。陈梅协调技术调查，王安协调客户工作。响应时限不是解决承诺。计算补偿前必须核对已签署合同。",
+            "language": "zh",
+            "version": 2,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/acme-sla?language=zh"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 32,
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1
+          },
+          {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 5,
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 5,
+        "tool_calls": 2,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [
+            {
+              "id": "k1",
+              "role": "knowledge",
+              "dependencies": [],
+              "status": "completed"
+            },
+            {
+              "id": "c1",
+              "role": "critic",
+              "dependencies": [
+                "k1"
+              ],
+              "status": "completed"
+            }
+          ],
+          "completed": [
+            "k1",
+            "c1"
+          ]
+        },
+        "verification": {
+          "checked_claims": 2,
+          "supported_claims": 2,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 0,
+          "claims": [
+            {
+              "kind": "fact",
+              "text": "Acme 一级升级事件的首次响应时限为 60 分钟。",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "一级升级事件的首次响应时限为 60 分钟。"
+                }
+              ]
+            },
+            {
+              "kind": "fact",
+              "text": "首次响应时限不是解决承诺。",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "响应时限不是解决承诺。"
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 5,
+          "tool_calls": 2,
+          "input_bytes": 23541,
+          "token_reservation": 33781,
+          "reported_tokens": 5010,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 10562,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4639,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4639,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2089,
+            "usage": {
+              "candidates_token_count": 252,
+              "prompt_token_count": 774,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 774
+                }
+              ],
+              "total_token_count": 1026
+            },
+            "cost_usd": "0.0008622",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "plan_validated",
+          "payload": {
+            "revision": 1,
+            "nodes": 2,
+            "roles": [
+              "knowledge",
+              "critic"
+            ],
+            "decision": "execute",
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "k1",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3917,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3917,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2408,
+            "usage": {
+              "candidates_token_count": 29,
+              "prompt_token_count": 476,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 476
+                }
+              ],
+              "total_token_count": 505
+            },
+            "cost_usd": "0.0002153",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 27,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 32,
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5598,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5598,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2124,
+            "usage": {
+              "candidates_token_count": 56,
+              "prompt_token_count": 1171,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1171
+                }
+              ],
+              "total_token_count": 1227
+            },
+            "cost_usd": "0.0004913",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 5,
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6129,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k1",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6129,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2194,
+            "usage": {
+              "candidates_token_count": 233,
+              "prompt_token_count": 1348,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1348
+                }
+              ],
+              "total_token_count": 1581
+            },
+            "cost_usd": "0.0009869",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "k1",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "source_ids": [
+              "acme-sla"
+            ],
+            "status": "complete",
+            "claim_count": 2
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "c1",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3258,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "c1",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3258,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1601,
+            "usage": {
+              "candidates_token_count": 60,
+              "prompt_token_count": 611,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 611
+                }
+              ],
+              "total_token_count": 671
+            },
+            "cost_usd": "0.0003333",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "c1",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 2,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "response_target",
+      "mode": "single",
+      "repeat": 1,
+      "passed": true,
+      "duration_ms": 8615,
+      "response": {
+        "status": "answered",
+        "answer": "Acme's initial response target is 60 minutes for a priority-one escalation.\n\nA response deadline is distinct from a resolution promise, as a response deadline is not a resolution promise.",
+        "sources": [
+          {
+            "id": "acme-sla",
+            "project_id": "acme",
+            "title": "Acme SLA terms",
+            "content": "Acme is a fictional Gold-tier customer. The initial response target is 60 minutes for a priority-one escalation. Mei Chen coordinates technical investigation and Alex Wang coordinates the account. A response deadline is not a resolution promise. The signed contract must be checked before calculating any credit.",
+            "language": "en",
+            "version": 2,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/acme-sla?language=en"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 65,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          },
+          {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 5,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 4,
+        "tool_calls": 2,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single",
+            "critic"
+          ]
+        },
+        "verification": {
+          "checked_claims": 2,
+          "supported_claims": 2,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 0,
+          "claims": [
+            {
+              "kind": "fact",
+              "text": "Acme's initial response target is 60 minutes for a priority-one escalation.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "The initial response target is 60 minutes for a priority-one escalation."
+                }
+              ]
+            },
+            {
+              "kind": "fact",
+              "text": "A response deadline is distinct from a resolution promise, as a response deadline is not a resolution promise.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "A response deadline is not a resolution promise."
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 4,
+          "tool_calls": 2,
+          "input_bytes": 34173,
+          "token_reservation": 42365,
+          "reported_tokens": 8553,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 8605,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8868,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8868,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2376,
+            "usage": {
+              "candidates_token_count": 57,
+              "prompt_token_count": 1972,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1972
+                }
+              ],
+              "total_token_count": 2029
+            },
+            "cost_usd": "0.0007341",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 48,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 65,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10560,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 10560,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2167,
+            "usage": {
+              "candidates_token_count": 56,
+              "prompt_token_count": 2642,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2642
+                }
+              ],
+              "total_token_count": 2698
+            },
+            "cost_usd": "0.0009326",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 5,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11183,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11183,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2321,
+            "usage": {
+              "candidates_token_count": 249,
+              "prompt_token_count": 2823,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2823
+                }
+              ],
+              "total_token_count": 3072
+            },
+            "cost_usd": "0.0014694",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "acme-sla"
+            ],
+            "status": "complete",
+            "claim_count": 2
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3562,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3562,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1553,
+            "usage": {
+              "candidates_token_count": 117,
+              "prompt_token_count": 637,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 637
+                }
+              ],
+              "total_token_count": 754
+            },
+            "cost_usd": "0.0004836",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 2,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "sla_proposal",
+      "mode": "single",
+      "repeat": 1,
+      "passed": false,
+      "duration_ms": 12632,
+      "response": {
+        "status": "budget_exceeded",
+        "answer": "Investigation reached its shared budget. Review saved work and narrow the request.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "calculate_sla_impact",
+            "outcome": "ok",
+            "document_ids": [
+              "case:INC-105"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 16,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 7,
+        "tool_calls": 1,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single"
+          ]
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 7,
+          "tool_calls": 1,
+          "input_bytes": 51917,
+          "token_reservation": 66253,
+          "reported_tokens": 15374,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 2,
+          "elapsed_ms": 12626,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8898,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8898,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1728,
+            "usage": {
+              "candidates_token_count": 59,
+              "prompt_token_count": 1982,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1982
+                }
+              ],
+              "total_token_count": 2041
+            },
+            "cost_usd": "0.0007421",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "calculate_sla_impact",
+            "outcome": "ok",
+            "document_ids": [
+              "case:INC-105"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 16,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 12853,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 12853,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1610,
+            "usage": {
+              "cache_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1682
+                }
+              ],
+              "cached_content_token_count": 1682,
+              "candidates_token_count": 198,
+              "prompt_token_count": 3568,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 3568
+                }
+              ],
+              "total_token_count": 3766
+            },
+            "cost_usd": "0.00111126",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "case:INC-105"
+            ],
+            "status": "complete",
+            "claim_count": 1
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3232,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3232,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1326,
+            "usage": {
+              "candidates_token_count": 79,
+              "prompt_token_count": 695,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 695
+                }
+              ],
+              "total_token_count": 774
+            },
+            "cost_usd": "0.000406",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              },
+              {
+                "index": 0,
+                "code": "uncertain"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7053,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7053,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2225,
+            "usage": {
+              "candidates_token_count": 303,
+              "prompt_token_count": 1972,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1972
+                }
+              ],
+              "total_token_count": 2275
+            },
+            "cost_usd": "0.0013491",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6278,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6278,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1881,
+            "usage": {
+              "candidates_token_count": 147,
+              "prompt_token_count": 1823,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1823
+                }
+              ],
+              "total_token_count": 1970
+            },
+            "cost_usd": "0.0009144",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 1,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 2
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7247,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7247,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2249,
+            "usage": {
+              "candidates_token_count": 440,
+              "prompt_token_count": 2085,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 2085
+                }
+              ],
+              "total_token_count": 2525
+            },
+            "cost_usd": "0.0017255",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "sla_calculated",
+          "payload": {
+            "ticket_id": "INC-105",
+            "ticket_version": 1,
+            "formula_version": "sla-minute-v1",
+            "outcome": "calculated",
+            "missing_inputs": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "case:INC-105",
+            "language": "en",
+            "version": 1,
+            "checksum": "017d76b8cbb645c9d8bd1c6d4dc76810ae682d4806b6acfd7e23029fec835ab4"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6356,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6356,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1404,
+            "usage": {
+              "candidates_token_count": 174,
+              "prompt_token_count": 1849,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1849
+                }
+              ],
+              "total_token_count": 2023
+            },
+            "cost_usd": "0.0009897",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 3,
+            "supported": 2,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "budget",
+            "budget": {
+              "model_calls": 7,
+              "tool_calls": 1,
+              "input_bytes": 51917,
+              "token_reservation": 66253,
+              "reported_tokens": 15374,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 2,
+              "elapsed_ms": 12623,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "deal_proposal",
+      "mode": "single",
+      "repeat": 1,
+      "passed": false,
+      "duration_ms": 12802,
+      "response": {
+        "status": "budget_exceeded",
+        "answer": "Investigation reached its shared budget. Review saved work and narrow the request.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "get_deal",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 16,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          },
+          {
+            "tool": "calculate_deal_terms",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 9,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 7,
+        "tool_calls": 2,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": [
+            "single"
+          ]
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 7,
+          "tool_calls": 2,
+          "input_bytes": 49464,
+          "token_reservation": 63800,
+          "reported_tokens": 14109,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 2,
+          "elapsed_ms": 12794,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8895,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8895,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2121,
+            "usage": {
+              "candidates_token_count": 100,
+              "prompt_token_count": 1980,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1980
+                }
+              ],
+              "total_token_count": 2080
+            },
+            "cost_usd": "0.000844",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "get_deal",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 16,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "calculate_deal_terms",
+            "outcome": "ok",
+            "document_ids": [
+              "deal:DEAL-101"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 9,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 15711,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 15711,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1978,
+            "usage": {
+              "cache_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1757
+                }
+              ],
+              "cached_content_token_count": 1757,
+              "candidates_token_count": 165,
+              "prompt_token_count": 4688,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 4688
+                }
+              ],
+              "total_token_count": 4853
+            },
+            "cost_usd": "0.00134451",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "source_ids": [
+              "deal:DEAL-101"
+            ],
+            "status": "complete",
+            "claim_count": 1
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3143,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3143,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1358,
+            "usage": {
+              "candidates_token_count": 100,
+              "prompt_token_count": 674,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 674
+                }
+              ],
+              "total_token_count": 774
+            },
+            "cost_usd": "0.0004522",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6189,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6189,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2357,
+            "usage": {
+              "candidates_token_count": 323,
+              "prompt_token_count": 1651,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1651
+                }
+              ],
+              "total_token_count": 1974
+            },
+            "cost_usd": "0.0013028",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4972,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4972,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1207,
+            "usage": {
+              "candidates_token_count": 75,
+              "prompt_token_count": 1321,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1321
+                }
+              ],
+              "total_token_count": 1396
+            },
+            "cost_usd": "0.0005838",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "claim_repair_requested",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "repair": 2
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6623,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "repair",
+            "node_id": "repair",
+            "plan_revision": 1,
+            "call": 6,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6623,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2318,
+            "usage": {
+              "candidates_token_count": 213,
+              "prompt_token_count": 1800,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1800
+                }
+              ],
+              "total_token_count": 2013
+            },
+            "cost_usd": "0.0010725",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "deal:DEAL-101",
+            "language": "en",
+            "version": 1,
+            "checksum": "8898bcc54fa23d460480157f30a7fe66a0d3d25c83b39ddcfac58a9d0c212c06"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3931,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "critic",
+            "plan_revision": 1,
+            "call": 7,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3931,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1253,
+            "usage": {
+              "candidates_token_count": 70,
+              "prompt_token_count": 949,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 949
+                }
+              ],
+              "total_token_count": 1019
+            },
+            "cost_usd": "0.0004597",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "critic",
+            "plan_revision": 1,
+            "claims": 1,
+            "supported": 0,
+            "passed": false,
+            "errors": [
+              {
+                "index": 0,
+                "code": "unsupported_number"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "budget",
+            "budget": {
+              "model_calls": 7,
+              "tool_calls": 2,
+              "input_bytes": 49464,
+              "token_reservation": 63800,
+              "reported_tokens": 14109,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 2,
+              "elapsed_ms": 12791,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "bilingual_target",
+      "mode": "single",
+      "repeat": 1,
+      "passed": false,
+      "duration_ms": 4874,
+      "response": {
+        "status": "invalid_response",
+        "answer": "调查已安全停止。重试前请检查当前来源及已保存的草稿或工作流。",
+        "sources": [],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "list_deals",
+            "outcome": "ok",
+            "document_ids": [],
+            "risk_tier": 0,
+            "duration_ms": 7,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          },
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 27,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 2,
+        "tool_calls": 2,
+        "agent_mode": "single",
+        "plan": {
+          "revision": 1,
+          "mode": "single",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 2,
+          "input_bytes": 20335,
+          "token_reservation": 24431,
+          "reported_tokens": 5365,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 4866,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "single",
+            "role": "single",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8874,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 8874,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2401,
+            "usage": {
+              "candidates_token_count": 94,
+              "prompt_token_count": 1977,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1977
+                }
+              ],
+              "total_token_count": 2071
+            },
+            "cost_usd": "0.0008281",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "list_deals",
+            "outcome": "ok",
+            "document_ids": [],
+            "risk_tier": 0,
+            "duration_ms": 7,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 23,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "engineer-notes",
+              "inc-104-runbook",
+              "inc-104-history"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 27,
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11461,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "single",
+            "node_id": "single",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 11461,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2378,
+            "usage": {
+              "candidates_token_count": 255,
+              "prompt_token_count": 3039,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 3039
+                }
+              ],
+              "total_token_count": 3294
+            },
+            "cost_usd": "0.0015492",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 2,
+              "input_bytes": 20335,
+              "token_reservation": 24431,
+              "reported_tokens": 5365,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 0,
+              "elapsed_ms": 4862,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "response_target",
+      "mode": "supervisor",
+      "repeat": 1,
+      "passed": true,
+      "duration_ms": 9647,
+      "response": {
+        "status": "answered",
+        "answer": "Acme's initial response target is 60 minutes for a priority-one escalation.\n\nA response deadline is not a resolution promise.",
+        "sources": [
+          {
+            "id": "acme-sla",
+            "project_id": "acme",
+            "title": "Acme SLA terms",
+            "content": "Acme is a fictional Gold-tier customer. The initial response target is 60 minutes for a priority-one escalation. Mei Chen coordinates technical investigation and Alex Wang coordinates the account. A response deadline is not a resolution promise. The signed contract must be checked before calculating any credit.",
+            "language": "en",
+            "version": 2,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/acme-sla?language=en"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes",
+              "operating-guide"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 26,
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1
+          },
+          {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 9,
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 5,
+        "tool_calls": 2,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [
+            {
+              "id": "node_knowledge",
+              "role": "knowledge",
+              "dependencies": [],
+              "status": "completed"
+            },
+            {
+              "id": "node_critic",
+              "role": "critic",
+              "dependencies": [
+                "node_knowledge"
+              ],
+              "status": "completed"
+            }
+          ],
+          "completed": [
+            "node_knowledge",
+            "node_critic"
+          ]
+        },
+        "verification": {
+          "checked_claims": 2,
+          "supported_claims": 2,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 0,
+          "claims": [
+            {
+              "kind": "fact",
+              "text": "Acme's initial response target is 60 minutes for a priority-one escalation.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "The initial response target is 60 minutes for a priority-one escalation."
+                }
+              ]
+            },
+            {
+              "kind": "fact",
+              "text": "A response deadline is not a resolution promise.",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "A response deadline is not a resolution promise."
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 5,
+          "tool_calls": 2,
+          "input_bytes": 26135,
+          "token_reservation": 36375,
+          "reported_tokens": 5806,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 9637,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4627,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4627,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2722,
+            "usage": {
+              "candidates_token_count": 278,
+              "prompt_token_count": 764,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 764
+                }
+              ],
+              "total_token_count": 1042
+            },
+            "cost_usd": "0.0009242",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "plan_validated",
+          "payload": {
+            "revision": 1,
+            "nodes": 2,
+            "roles": [
+              "knowledge",
+              "critic"
+            ],
+            "decision": "execute",
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "node_knowledge",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4403,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4403,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2041,
+            "usage": {
+              "candidates_token_count": 57,
+              "prompt_token_count": 620,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 620
+                }
+              ],
+              "total_token_count": 677
+            },
+            "cost_usd": "0.0003285",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 5,
+            "duration_ms": 22,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-history",
+              "inc-104-runbook",
+              "engineer-notes",
+              "operating-guide"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 26,
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6491,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6491,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1742,
+            "usage": {
+              "candidates_token_count": 56,
+              "prompt_token_count": 1440,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1440
+                }
+              ],
+              "total_token_count": 1496
+            },
+            "cost_usd": "0.000572",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 9,
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7114,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "node_knowledge",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 7114,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1804,
+            "usage": {
+              "candidates_token_count": 238,
+              "prompt_token_count": 1621,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1621
+                }
+              ],
+              "total_token_count": 1859
+            },
+            "cost_usd": "0.0010813",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "node_knowledge",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "source_ids": [
+              "acme-sla"
+            ],
+            "status": "complete",
+            "claim_count": 2
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "node_critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3500,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "node_critic",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3500,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1173,
+            "usage": {
+              "candidates_token_count": 106,
+              "prompt_token_count": 626,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 626
+                }
+              ],
+              "total_token_count": 732
+            },
+            "cost_usd": "0.0004528",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "node_critic",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 2,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "en",
+            "version": 2,
+            "checksum": "69b9a0cfbd6d5fc96655142d64ee6aa78a79ae3c62eb9fddf6820e622c06777f"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "sla_proposal",
+      "mode": "supervisor",
+      "repeat": 1,
+      "passed": false,
+      "duration_ms": 5386,
+      "response": {
+        "status": "invalid_response",
+        "answer": "The investigation stopped safely. Review current sources and any saved draft or workflow before retrying.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [],
+        "model_calls": 2,
+        "tool_calls": 0,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 0,
+          "input_bytes": 9478,
+          "token_reservation": 13574,
+          "reported_tokens": 2419,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 1,
+          "elapsed_ms": 5378,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2754,
+            "usage": {
+              "candidates_token_count": 389,
+              "prompt_token_count": 790,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 790
+                }
+              ],
+              "total_token_count": 1179
+            },
+            "cost_usd": "0.0012095",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4696,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4782,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4782,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2588,
+            "usage": {
+              "candidates_token_count": 432,
+              "prompt_token_count": 808,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 808
+                }
+              ],
+              "total_token_count": 1240
+            },
+            "cost_usd": "0.0013224",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4782,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 0,
+              "input_bytes": 9478,
+              "token_reservation": 13574,
+              "reported_tokens": 2419,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 1,
+              "elapsed_ms": 5374,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "deal_proposal",
+      "mode": "supervisor",
+      "repeat": 1,
+      "passed": false,
+      "duration_ms": 5399,
+      "response": {
+        "status": "invalid_response",
+        "answer": "The investigation stopped safely. Review current sources and any saved draft or workflow before retrying.",
+        "sources": [],
+        "files": [],
+        "tool_trace": [],
+        "model_calls": 2,
+        "tool_calls": 0,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [],
+          "completed": []
+        },
+        "verification": null,
+        "budget": {
+          "model_calls": 2,
+          "tool_calls": 0,
+          "input_bytes": 9468,
+          "token_reservation": 13564,
+          "reported_tokens": 2422,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 1,
+          "elapsed_ms": 5392,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2562,
+            "usage": {
+              "candidates_token_count": 446,
+              "prompt_token_count": 787,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 787
+                }
+              ],
+              "total_token_count": 1233
+            },
+            "cost_usd": "0.0013511",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4691,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2790,
+            "usage": {
+              "candidates_token_count": 384,
+              "prompt_token_count": 805,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 805
+                }
+              ],
+              "total_token_count": 1189
+            },
+            "cost_usd": "0.0012015",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "model_schema_error",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4777,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "collaboration_stopped",
+          "payload": {
+            "reason": "InvalidOutput",
+            "budget": {
+              "model_calls": 2,
+              "tool_calls": 0,
+              "input_bytes": 9468,
+              "token_reservation": 13564,
+              "reported_tokens": 2422,
+              "unknown_usage_calls": 0,
+              "replans": 0,
+              "repairs": 1,
+              "elapsed_ms": 5389,
+              "max_model_calls": 16,
+              "max_tool_calls": 24,
+              "max_input_bytes": 500000,
+              "max_token_reservation": 550000,
+              "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+            }
+          }
+        },
+        {
+          "kind": "failed",
+          "payload": {}
+        }
+      ]
+    },
+    {
+      "case": "bilingual_target",
+      "mode": "supervisor",
+      "repeat": 1,
+      "passed": true,
+      "duration_ms": 9508,
+      "response": {
+        "status": "answered",
+        "answer": "Acme 一级升级事件的首次响应时限为 60 分钟。\n\n响应时限不是解决承诺。",
+        "sources": [
+          {
+            "id": "acme-sla",
+            "project_id": "acme",
+            "title": "Acme SLA 条款",
+            "content": "Acme 是虚构的金牌客户。一级升级事件的首次响应时限为 60 分钟。陈梅协调技术调查，王安协调客户工作。响应时限不是解决承诺。计算补偿前必须核对已签署合同。",
+            "language": "zh",
+            "version": 2,
+            "updated_at": "2026-11-15T01:00:00Z",
+            "source_url": "/v1/documents/acme-sla?language=zh"
+          }
+        ],
+        "files": [],
+        "tool_trace": [
+          {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-runbook",
+              "inc-104-history",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 29,
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1
+          },
+          {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 6,
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1
+          }
+        ],
+        "model_calls": 5,
+        "tool_calls": 2,
+        "agent_mode": "supervisor",
+        "plan": {
+          "revision": 1,
+          "mode": "supervisor",
+          "nodes": [
+            {
+              "id": "k_read",
+              "role": "knowledge",
+              "dependencies": [],
+              "status": "completed"
+            },
+            {
+              "id": "c_crit",
+              "role": "critic",
+              "dependencies": [
+                "k_read"
+              ],
+              "status": "completed"
+            }
+          ],
+          "completed": [
+            "k_read",
+            "c_crit"
+          ]
+        },
+        "verification": {
+          "checked_claims": 2,
+          "supported_claims": 2,
+          "method": "deterministic_provenance_and_independent_semantic_critic",
+          "repairs": 0,
+          "claims": [
+            {
+              "kind": "fact",
+              "text": "Acme 一级升级事件的首次响应时限为 60 分钟。",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "一级升级事件的首次响应时限为 60 分钟。"
+                }
+              ]
+            },
+            {
+              "kind": "fact",
+              "text": "响应时限不是解决承诺。",
+              "evidence": [
+                {
+                  "source_id": "acme-sla",
+                  "version": 2,
+                  "quote": "响应时限不是解决承诺。"
+                }
+              ]
+            }
+          ]
+        },
+        "budget": {
+          "model_calls": 5,
+          "tool_calls": 2,
+          "input_bytes": 23591,
+          "token_reservation": 33831,
+          "reported_tokens": 5006,
+          "unknown_usage_calls": 0,
+          "replans": 0,
+          "repairs": 0,
+          "elapsed_ms": 9500,
+          "max_model_calls": 16,
+          "max_tool_calls": 24,
+          "max_input_bytes": 500000,
+          "max_token_reservation": 550000,
+          "token_measure": "UTF-8 input bytes plus reserved maximum output tokens; conservative proxy, not exact tokenizer billing"
+        }
+      },
+      "events": [
+        {
+          "kind": "started",
+          "payload": {
+            "kind": "chat"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4639,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "supervisor",
+            "node_id": "supervisor",
+            "plan_revision": 1,
+            "call": 1,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 4639,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2013,
+            "usage": {
+              "candidates_token_count": 257,
+              "prompt_token_count": 774,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 774
+                }
+              ],
+              "total_token_count": 1031
+            },
+            "cost_usd": "0.0008747",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "plan_validated",
+          "payload": {
+            "revision": 1,
+            "nodes": 2,
+            "roles": [
+              "knowledge",
+              "critic"
+            ],
+            "decision": "execute",
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "specialist_started",
+          "payload": {
+            "node_id": "k_read",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "dependencies": []
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3923,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 2,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3923,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1979,
+            "usage": {
+              "candidates_token_count": 59,
+              "prompt_token_count": 478,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 478
+                }
+              ],
+              "total_token_count": 537
+            },
+            "cost_usd": "0.0002909",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "retrieval",
+          "payload": {
+            "method": "bm25",
+            "candidate_chunks": 10,
+            "returned": 4,
+            "duration_ms": 25,
+            "degraded": false
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "search_knowledge",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla",
+              "inc-104-runbook",
+              "inc-104-history",
+              "engineer-notes"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 29,
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5623,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 3,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 5623,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1950,
+            "usage": {
+              "candidates_token_count": 31,
+              "prompt_token_count": 1174,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1174
+                }
+              ],
+              "total_token_count": 1205
+            },
+            "cost_usd": "0.0004297",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "tool_call",
+          "payload": {
+            "tool": "read_document",
+            "outcome": "ok",
+            "document_ids": [
+              "acme-sla"
+            ],
+            "risk_tier": 0,
+            "duration_ms": 6,
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6154,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "knowledge",
+            "node_id": "k_read",
+            "plan_revision": 1,
+            "call": 4,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 6154,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 2035,
+            "usage": {
+              "candidates_token_count": 151,
+              "prompt_token_count": 1351,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1351
+                }
+              ],
+              "total_token_count": 1502
+            },
+            "cost_usd": "0.0007828",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "specialist_completed",
+          "payload": {
+            "node_id": "k_read",
+            "role": "knowledge",
+            "plan_revision": 1,
+            "source_ids": [
+              "acme-sla"
+            ],
+            "status": "complete",
+            "claim_count": 2
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "model_started",
+          "payload": {
+            "role": "critic",
+            "node_id": "c_crit",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3252,
+            "prompt_version": "case-collaboration-v1"
+          }
+        },
+        {
+          "kind": "model_call",
+          "payload": {
+            "role": "critic",
+            "node_id": "c_crit",
+            "plan_revision": 1,
+            "call": 5,
+            "model": "gemini-3.5-flash-lite",
+            "input_bytes": 3252,
+            "prompt_version": "case-collaboration-v1",
+            "duration_ms": 1392,
+            "usage": {
+              "candidates_token_count": 121,
+              "prompt_token_count": 610,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 610
+                }
+              ],
+              "total_token_count": 731
+            },
+            "cost_usd": "0.0004855",
+            "pricing_version": "google-standard-text-2026-11-16",
+            "cost_basis": "paid-tier standard text API list-price estimate; not actual billing, free tier, cache storage or infrastructure cost"
+          }
+        },
+        {
+          "kind": "claims_checked",
+          "payload": {
+            "node_id": "c_crit",
+            "plan_revision": 1,
+            "claims": 2,
+            "supported": 2,
+            "passed": true,
+            "errors": []
+          }
+        },
+        {
+          "kind": "evidence_read",
+          "payload": {
+            "id": "acme-sla",
+            "language": "zh",
+            "version": 2,
+            "checksum": "dbdb600b98861da8a8006d98f1ae98ddbeabe776e232c582a64fc5ce63ef6264"
+          }
+        },
+        {
+          "kind": "completed",
+          "payload": {}
+        }
+      ]
+    }
+  ],
+  "passed": 5,
+  "total": 16,
+  "dataset_sha256": "6320dc42c71998ce2d7e5634e97e39a76ba031bc4c2675d9809ab408d5f616d6",
+  "limits": [
+    "Small fixed synthetic smoke set, not the 60-scenario live quality benchmark.",
+    "Independent expected source/numeric/no-mutation assertions supplement the model critic; no human-calibrated groundedness claim.",
+    "Standard paid list-price estimate, not actual billing. Timed-out calls retain their conservative reservation."
+  ]
+}

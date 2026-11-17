@@ -1,0 +1,287 @@
+{
+  "fixture_version": "sla-deal-desk-v1",
+  "organizations": [
+    {
+      "id": "northstar",
+      "name": {
+        "en": "Northstar Labs (fictional)",
+        "zh": "北辰实验室（虚构）"
+      }
+    },
+    {
+      "id": "otherco",
+      "name": {
+        "en": "Other Company (fictional)",
+        "zh": "另一家公司（虚构）"
+      }
+    }
+  ],
+  "teams": [
+    {
+      "id": "engineering",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Engineering",
+        "zh": "研发"
+      }
+    },
+    {
+      "id": "sales",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Sales",
+        "zh": "销售"
+      }
+    },
+    {
+      "id": "operations",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Operations",
+        "zh": "运营"
+      }
+    },
+    {
+      "id": "external-team",
+      "organization_id": "otherco",
+      "name": {
+        "en": "Engineering",
+        "zh": "研发"
+      }
+    }
+  ],
+  "employees": [
+    {
+      "id": "mei",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Mei Chen",
+        "zh": "陈梅"
+      },
+      "team_ids": [
+        "engineering"
+      ],
+      "active": true
+    },
+    {
+      "id": "alex",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Alex Wang",
+        "zh": "王安"
+      },
+      "team_ids": [
+        "sales"
+      ],
+      "active": true
+    },
+    {
+      "id": "lin",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Lin Zhao",
+        "zh": "赵林"
+      },
+      "team_ids": [
+        "operations"
+      ],
+      "active": true
+    },
+    {
+      "id": "former",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Former Employee",
+        "zh": "离职员工"
+      },
+      "team_ids": [
+        "engineering"
+      ],
+      "active": false
+    },
+    {
+      "id": "outsider",
+      "organization_id": "otherco",
+      "name": {
+        "en": "Sam Lee",
+        "zh": "李森"
+      },
+      "team_ids": [
+        "external-team"
+      ],
+      "active": true
+    }
+  ],
+  "projects": [
+    {
+      "id": "acme",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Acme customer account",
+        "zh": "Acme 客户档案"
+      }
+    },
+    {
+      "id": "other-account",
+      "organization_id": "otherco",
+      "name": {
+        "en": "Other customer account",
+        "zh": "另一客户档案"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "operating-guide",
+      "organization_id": "northstar",
+      "project_id": null,
+      "title": {
+        "en": "SLA and deal desk operating guide",
+        "zh": "SLA 与商务审批操作指南"
+      },
+      "content": {
+        "en": "Northstar is a fictional B2B service provider. Investigations must distinguish evidence, hypotheses, and proposals. Customer credits, contract changes, and external messages require authorized human approval. This demo currently supports policy lookup and private drafts only.",
+        "zh": "北辰是一家虚构的企业服务商。调查必须区分证据、假设和提案。客户补偿、合同变更和对外消息均需授权人员审批。本演示目前仅支持政策查询和私人草稿。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "acme-sla",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Acme SLA terms",
+        "zh": "Acme SLA 条款"
+      },
+      "content": {
+        "en": "Acme is a fictional Gold-tier customer. The initial response target is 60 minutes for a priority-one escalation. Mei Chen coordinates technical investigation and Alex Wang coordinates the account. A response deadline is not a resolution promise. The signed contract must be checked before calculating any credit.",
+        "zh": "Acme 是虚构的金牌客户。一级升级事件的首次响应时限为 60 分钟。陈梅协调技术调查，王安协调客户工作。响应时限不是解决承诺。计算补偿前必须核对已签署合同。"
+      },
+      "version": 2,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "inc-104-runbook",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Acme incident investigation runbook",
+        "zh": "Acme 事件调查手册"
+      },
+      "content": {
+        "en": "For Acme incident INC-104, collect service logs, incident start/end times, and maintenance exclusions before asserting a root cause or SLA breach. Mei Chen owns the technical investigation. Root cause is not confirmed. Internal test marker: AURORA-PRIVATE-742.",
+        "zh": "对于 Acme 事件 INC-104，需收集服务日志、事件起止时间和维护排除项，再判断根因或 SLA 违约。陈梅负责技术调查，根因尚未确认。内部测试标记：AURORA-PRIVATE-742。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "restricted",
+      "reader_team_ids": [
+        "engineering"
+      ],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "acme-deal",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Acme deal review draft",
+        "zh": "Acme 商务评审草稿"
+      },
+      "content": {
+        "en": "Acme requested a 12 percent renewal discount. Alex Wang owns the commercial draft. The request is not approved. Finance must verify cost basis, gross margin, and current pricing policy before a contract change. Do not present a proposed discount as a confirmed price.",
+        "zh": "Acme 申请续约优惠 12%。王安负责商务草稿，该申请尚未批准。合同变更前，财务须核对成本、毛利和当前定价政策。不得将建议折扣表述为已确认价格。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "restricted",
+      "reader_team_ids": [
+        "sales"
+      ],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "credit-policy",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Acme service credit review policy",
+        "zh": "Acme 服务补偿审批政策"
+      },
+      "content": {
+        "en": "In this fictional Acme policy, eligible service credit proposals are capped at 5 percent of the applicable monthly service fee. Lin Zhao reviews eligibility and amount. A cap does not establish eligibility. No credit has been issued. This policy is restricted to Operations.",
+        "zh": "在这份虚构的 Acme 政策中，符合条件的服务补偿提案上限为适用月服务费的 5%。赵林审核资格和金额。上限并不代表已符合补偿条件，当前未发放任何补偿。本政策仅供运营团队访问。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "restricted",
+      "reader_team_ids": [
+        "operations"
+      ],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "engineer-notes",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Mei private incident notes",
+        "zh": "陈梅的私人事件笔记"
+      },
+      "content": {
+        "en": "For Acme INC-104, I want to check whether maintenance overlapped the reported outage. This is an unverified investigation hypothesis, not an approved customer explanation.",
+        "zh": "对于 Acme INC-104，我想核实维护是否与报告的故障时间重叠。这是未经验证的调查假设，并非已批准的客户解释。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "restricted",
+      "reader_team_ids": [],
+      "reader_employee_ids": [
+        "mei"
+      ]
+    },
+    {
+      "id": "inc-104-history",
+      "organization_id": "northstar",
+      "project_id": "acme",
+      "title": {
+        "en": "Acme INC-104 escalation history",
+        "zh": "Acme INC-104 升级记录"
+      },
+      "content": {
+        "en": "Acme reported INC-104 on November 15, 2026 at 09:00 Asia/Shanghai. The report describes intermittent errors. End time, eligible downtime, root cause, and credit eligibility are still unknown. The account manager requested an investigation memo and a customer-response draft; neither has been approved for sending.",
+        "zh": "Acme 于 2026 年 11 月 15 日 09:00（Asia/Shanghai）报告事件 INC-104，描述为间歇性错误。结束时间、符合计算条件的停机时长、根因及补偿资格仍未知。客户经理要求调查备忘录与客户回复草稿，均未获批发送。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "other-account-policy",
+      "organization_id": "otherco",
+      "project_id": "other-account",
+      "title": {
+        "en": "Other account SLA terms",
+        "zh": "另一客户 SLA 条款"
+      },
+      "content": {
+        "en": "This customer account belongs to Other Company. Its fictional response target is 120 minutes. OTHER-ORG-SECRET-915 must never be returned to Northstar employees.",
+        "zh": "此客户档案属于另一家公司，其虚构响应时限为 120 分钟。OTHER-ORG-SECRET-915 不得返回给北辰实验室员工。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-15T01:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    }
+  ]
+}

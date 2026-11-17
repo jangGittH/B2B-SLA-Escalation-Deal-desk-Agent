@@ -1,0 +1,12 @@
+{
+  "version": "sla-deal-showcase-v1",
+  "categories": {
+    "escalation": ["sla_standard", "sla_half", "sla_zero", "sla_third", "sla_ineligible", "sla_missing", "sla_no_exclusions", "sla_cap", "sla_reject", "sla_cancel", "sla_duplicate", "sla_chinese"],
+    "commercial": ["deal_standard", "deal_half_discount", "deal_zero_discount", "deal_policy_exception", "deal_missing_cost", "deal_expired_policy", "deal_contract_conflict", "deal_duplicate"],
+    "access_adversarial": ["cross_tenant", "wrong_reviewer", "self_approval", "source_revoked", "forged_payload", "injected_document", "forged_tool_identity", "false_claim", "invalid_plan", "inactive_actor"],
+    "context_memory": ["ambiguous", "followup", "large_output", "memory_pending", "memory_confirmed", "memory_expired", "memory_stale", "memory_conflict"],
+    "approval_concurrency": ["changed_ticket", "changed_contract", "changed_policy", "changed_memo", "changed_source", "reviewer_revoked", "expired_approval", "concurrent_decisions", "stale_decision", "request_key_conflict"],
+    "recovery": ["provider_timeout", "provider_429", "schema_repair", "read_timeout", "before_commit_failure", "after_commit_replay", "partial_readback", "duplicate_delivery"],
+    "files_bilingual": ["chinese_memo", "pdf_export", "literal_table_export", "private_file_access"]
+  }
+}
