@@ -17,16 +17,16 @@ class Contract(BaseModel):
     model_config = ConfigDict(extra='forbid', str_strip_whitespace=True)
 
 class Intake(Contract):
-    route: Literal['investigate', 'conversation', 'clarify']
+    route: Literal['investigate', 'conversation', 'clarify', 'recall_question']
     reply: str = Field(default='', max_length=2000)
     resolved_request: str = Field(default='', max_length=2000, description='Explicit task resolved from the latest message and recent context; never invent scope or approval.')
 
     @model_validator(mode='after')
     def reply_for_conversation(self):
-        if self.route != 'investigate' and not self.reply:
+        if self.route in ('conversation','clarify') and not self.reply:
             raise ValueError('A conversational reply or clarification question is required')
-        if self.route == 'investigate' and self.reply:
-            raise ValueError('Business answers must come from investigation')
+        if self.route in ('investigate','recall_question') and self.reply:
+            raise ValueError('Do not generate a reply for investigation or question recall')
         return self
 
 class ConversationCheck(Contract):

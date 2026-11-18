@@ -82,10 +82,11 @@ def install_routes(app, database, service, authorize, execute_agent, request_tim
         try:
             history = []
             size = 0
-            previous = database.conversation(actor, row['conversation_id'])['runs']
+            previous = [item for item in database.conversation(actor, row['conversation_id'])['runs']
+                        if (item['created_at'],item['id']) < (row['created_at'],row['id'])]
             for item in reversed(previous):
                 result = public_run(actor, item)['result']
-                if item['id'] == row['id'] or not result:
+                if not result:
                     continue
                 question, answer = item['request']['question'], result['answer']
                 size += len(question) + len(answer)
@@ -96,7 +97,7 @@ def install_routes(app, database, service, authorize, execute_agent, request_tim
             from .context.tables import contexts
             from sqlalchemy import select
             for item in reversed(previous):
-                if item['id']==row['id'] or not public_run(actor,item)['result']:continue
+                if not public_run(actor,item)['result']:continue
                 with database.engine.connect() as c:
                     saved=c.execute(select(contexts.c.payload).where(contexts.c.run_id==item['id'])).scalar_one_or_none()
                 if saved:

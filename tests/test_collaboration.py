@@ -136,6 +136,28 @@ def test_model_transient_retry_is_bounded_and_does_not_retry_denial():
     assert result.status=='answered' and result.model_calls==6
 
 
+def test_premature_not_found_is_repaired():
+    class Premature(CaseModel):
+        async def structured(self,role,payload,*args):
+            if role=='knowledge' and not self.fired:
+                self.fired=True
+                return StructuredReply({'result':{'status':'not_found'}})
+            return await super().structured(role,payload,*args)
+    result=run(FixtureRepository.load(),'What is the response target?',Premature())
+    assert result.status=='answered' and result.budget['repairs']==1
+
+
+@pytest.mark.parametrize('language,expected',[('en','timed out'),('zh','超时')])
+def test_persistent_timeout_explains_failure_without_provider_details(language,expected):
+    class Unavailable(CaseModel):
+        async def structured(self,*args):
+            raise TimeoutError('private provider detail')
+    agent=CollaborationAgent(KnowledgeService(FixtureRepository.load()),Unavailable())
+    result=asyncio.run(agent.ask('mei',AgentRequest(question='Investigate INC-105',language=language)))
+    assert result.status=='invalid_response' and result.model_calls==2
+    assert expected in result.answer and 'private provider detail' not in result.answer
+
+
 def test_pricing_unknown_and_exact_cached_thinking_cost():
     from work_assistant.runtime.pricing import estimate
     at=datetime(2026,11,16,tzinfo=timezone.utc)
@@ -242,6 +264,45 @@ def test_natural_conversation_has_no_business_tools_or_evidence_repair(question,
     assert [r for r,_ in model.calls]==['intake','conversation_guard']
 
 
+@pytest.mark.parametrize('mode',['single','supervisor'])
+def test_previous_question_is_chat_recall_not_an_investigation(mode):
+    agent=CollaborationAgent(KnowledgeService(FixtureRepository.load()),CaseModel())
+    history=[{'question':'Hello','answer':'Hi'},{'question':'Start a review for INC-105','answer':'private reply'}]
+    result=asyncio.run(agent.ask('mei',AgentRequest(question='? what did I asked before?',mode=mode),history))
+    assert result.status=='answered' and result.answer=='Your previous message was: “Start a review for INC-105”'
+    assert result.tool_calls==result.model_calls==result.budget['repairs']==0
+
+
+def test_missing_previous_question_is_not_invented():
+    result=asyncio.run(CollaborationAgent(KnowledgeService(FixtureRepository.load()),CaseModel()).ask(
+        'mei',AgentRequest(question='我刚才问了什么？',language='zh')))
+    assert result.status=='not_found' and '没有' in result.answer and result.model_calls==0
+
+
+def test_durable_history_recall_uses_only_the_current_conversation(database):
+    with TestClient(create_app({'mei':'mei'},database_url=database.url,model_factory=CaseModel,embedded_worker=False)) as client:
+        chat=conversation(client)
+        question='What is the response target?'
+        assert message(client,chat,question=question).json()['result']['status']=='answered'
+        recall='? what did I asked before?'
+        result=message(client,chat,question=recall,key='recall').json()['result']
+        assert result['answer']==f'Your previous message was: “{question}”'
+        assert result['model_calls']==result['tool_calls']==0
+        other=message(client,conversation(client),question=recall,key='other-chat').json()['result']
+        assert other['status']=='not_found'
+
+
+def test_intake_can_route_paraphrased_recall_without_investigation():
+    class Recall(CaseModel):
+        async def structured(self,role,*args):
+            assert role=='intake'
+            return StructuredReply({'route':'recall_question'})
+    history=[{'question':'Hello','answer':'Hi'}]
+    result=asyncio.run(CollaborationAgent(KnowledgeService(FixtureRepository.load()),Recall()).ask(
+        'mei',AgentRequest(question='Remind me of my last message please'),history))
+    assert result.answer=='Your previous message was: “Hello”' and result.model_calls==1 and not result.tool_calls
+
+
 def test_conversation_cannot_bypass_business_verification_and_followup_context():
     class Misrouted(CaseModel):
         async def structured(self,role,payload,*args):
@@ -264,6 +325,7 @@ def test_repair_stop_explains_actual_limit():
             return await super().structured(role,payload,*args)
     result=run(FixtureRepository.load(),'What is the response target?',Unsupported())
     assert result.status=='budget_exceeded' and 'two correction attempts' in result.answer
+    assert result.budget['limit_reached']=='repair budget'
     assert 'narrow' not in result.answer
 
 

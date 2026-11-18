@@ -2,6 +2,7 @@
 import asyncio
 import hashlib
 import json
+import re
 import time
 from dataclasses import dataclass, field
 import anyio
@@ -49,6 +50,34 @@ def transient(exc):
     return isinstance(exc,(TimeoutError,httpx.TimeoutException,httpx.NetworkError,CapacityError)) or (
         isinstance(exc,genai.errors.APIError) and exc.code in (429,500,502,503,504))
 
+def investigation_failure(exc,language,mutated):
+    if isinstance(exc,UnknownOutcome):
+        messages=('I could not confirm whether the action finished. Check saved drafts and workflow status before trying it again.',
+                  '无法确认操作是否完成。请先查看已保存的草稿和工作流状态，再决定是否重试。')
+    elif isinstance(exc,Denied):
+        messages=('That operation is not available for this investigation. Ask for a permitted read or review instead.',
+                  '本次调查不能执行该操作。请改为请求允许的查询或审核。')
+    elif isinstance(exc,InvalidOutput):
+        messages=('I could not verify the investigation result. Try asking about one record or one question at a time.',
+                  '无法验证调查结果。请尝试每次只查询一条记录或一个问题。')
+    elif isinstance(exc,EvidenceChanged):
+        messages=('The source records changed during the investigation. Request a fresh check of the current records.',
+                  '调查期间来源记录发生了变化。请重新查询当前记录。')
+    elif isinstance(exc,(TimeoutError,httpx.TimeoutException)):
+        messages=('A service timed out before I could finish. Try again in a moment.',
+                  '服务响应超时，未能完成调查。请稍后再试。')
+    elif transient(exc):
+        messages=('A required service is temporarily unavailable. Try again in a moment.',
+                  '所需服务暂时不可用。请稍后再试。')
+    else:
+        messages=('A required service rejected or failed the request. Ask the workspace operator to check the run trace.',
+                  '所需服务拒绝了请求或处理失败。请联系工作区管理员查看运行记录。')
+    message=messages[language=='zh']
+    if mutated and not isinstance(exc,UnknownOutcome):
+        message+=(' Some work was already saved. Check drafts and workflow status before repeating any action.',
+                  ' 部分工作已保存。重复操作前请先查看草稿和工作流状态。')[language=='zh']
+    return message
+
 class CollaborationAgent:
     def __init__(self, knowledge, model, files=None, budget_factory=Budget):
         self.knowledge=knowledge;self.model=model;self.files=files;self.budget_factory=budget_factory
@@ -65,6 +94,7 @@ class Session:
         self.task=TaskContext(request.question,self.budget.max_model_calls,self.budget.max_tool_calls)
         self.task.data['planning_mode']=request.mode
         self.history=[{'question':r['question'][:1000],'answer':r['answer'] if len(r['answer'])<=2500 else r['answer'][:1200]+'\n[excerpt omitted]\n'+r['answer'][-1200:]} for r in (history or [])[-6:]]
+        self.previous_question=history[-1]['question'] if history else None
         self.resolved_question=request.question
         self.verification=None;self.memory=[]
 
@@ -254,7 +284,10 @@ class Session:
                     self.budget.repair()
                     payload['feedback']='Before completing, call the typed list, count, read or calculation tool for your objective. An inherited handoff does not satisfy this independent check.'
                     continue
-                if result.status=='not_found' and not payload['observations']:raise InvalidOutput('Investigate before reporting no evidence')
+                if result.status=='not_found' and not payload['observations']:
+                    self.budget.repair()
+                    payload['feedback']='Use an allowed lookup tool before reporting that no evidence was found.'
+                    continue
                 current_sources(self.knowledge,self.actor,gateway.evidence)
                 returned=NodeResult(result,dict(gateway.evidence),gateway.artifacts[before:],changed)
                 save_step(self.revision,node,'completed',{'handoff':result.model_dump(),'sources':[source_reference(d) for d in gateway.evidence.values()]})
@@ -338,9 +371,20 @@ class Session:
         event('plan_invalidated',{'revision':self.revision-1,'invalidated_nodes':sorted(invalid),'preserved_nodes':list(self.completed)})
         await self.plan_next('Source changed: refresh invalidated evidence and dependent calculations/drafts. Preserve unchanged completed nodes.')
 
+    def recall_question(self):
+        event('intake_routed',{'route':'recall_question'})
+        if self.previous_question is None:
+            return self.response('not_found',('I don’t see an earlier message from you in the available chat history.',
+                '当前可见的聊天记录中没有你之前的消息。')[self.request.language=='zh'])
+        return self.response('answered',(f'Your previous message was: “{self.previous_question}”',
+            f'你的上一条消息是：“{self.previous_question}”')[self.request.language=='zh'])
+
     async def run(self):
         self.knowledge._actor(self.actor)
         try:
+            normalized=' '.join(self.request.question.casefold().strip(' ?？!.。！').split())
+            if re.fullmatch(r'what did i (?:ask(?:ed)?|say)(?: you)?(?: before| earlier| last| just now)?|what was my (?:last|previous) (?:question|message)|我(?:刚才|刚刚|之前)问(?:了)?什么',normalized):
+                return self.recall_question()
             intake_payload={'question':self.request.question,'history':self.history,'capabilities':CAPABILITIES,
                             'mode':self.request.mode}
             try:
@@ -348,6 +392,7 @@ class Session:
             except InvalidOutput as exc:
                 self.budget.repair()
                 intake=await self.model('intake',intake_payload|{'feedback':str(exc)},Intake,'intake')
+            if intake.route=='recall_question':return self.recall_question()
             event('intake_routed',{'route':intake.route})
             self.resolved_question=intake.resolved_request or self.request.question
             self.task.data['resolved_request']=self.resolved_question
@@ -404,12 +449,14 @@ class Session:
                 'deadline':('The investigation took too long and stopped. Please review any saved work before retrying.', '调查耗时过长，已停止。重试前请查看已保存的结果。'),
             }
             message=messages.get(limit,('The investigation reached its '+limit+' limit. Review saved work before continuing.', '调查已达到限制（'+limit+'）。继续前请查看已保存的结果。'))
-            return self.response('budget_exceeded',message[self.request.language=='zh'])
+            response=self.response('budget_exceeded',message[self.request.language=='zh'])
+            response.budget['limit_reached']=limit
+            return response
         except PermissionError:raise
         except (Denied,InvalidOutput,UnknownOutcome,EvidenceChanged,TimeoutError,httpx.HTTPError,genai.errors.APIError,CapacityError) as exc:
             event('collaboration_stopped',{'reason':type(exc).__name__,'budget':self.budget.snapshot(),
                 'detail':str(exc)[:200] if isinstance(exc,(Denied,InvalidOutput,UnknownOutcome,EvidenceChanged)) else 'Provider or transport failure'})
-            return self.response('invalid_response','The investigation stopped safely. Review current sources and any saved draft or workflow before retrying.' if self.request.language=='en' else '调查已安全停止。重试前请检查当前来源及已保存的草稿或工作流。')
+            return self.response('invalid_response',investigation_failure(exc,self.request.language,self.mutated))
         except Exception as exc:
             event('collaboration_stopped',{'reason':'internal','exception_type':type(exc).__name__,'budget':self.budget.snapshot()})
             return self.response('invalid_response','Investigation interrupted. Review saved work before retrying.' if self.request.language=='en' else '调查已中断，请在重试前查看已保存的结果。')

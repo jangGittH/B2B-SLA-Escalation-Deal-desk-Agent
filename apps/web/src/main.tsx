@@ -55,7 +55,7 @@ type Answer = {
   agent_mode?: string;
   plan?: { revision: number; nodes: { id: string; role: string; dependencies: string[]; status: string }[] };
   verification?: { checked_claims: number; supported_claims: number; repairs: number };
-  budget?: { replans: number; elapsed_ms: number };
+  budget?: { replans: number; elapsed_ms: number; limit_reached?: string };
 };
 type SavedConversation = { id: string; title: string };
 type SavedRun = {
@@ -922,7 +922,9 @@ function App() {
                                   </div>
                                   {m.result.status !== "answered" && (
                                     <span className="result-status">
-                                      {m.result.status.replaceAll("_", " ")}
+                                      {m.result.budget?.limit_reached === "repair budget"
+                                        ? t("Correction limit reached", "已达到修正次数上限")
+                                        : m.result.status.replaceAll("_", " ")}
                                     </span>
                                   )}
                                   {!!m.result.files?.length && (
