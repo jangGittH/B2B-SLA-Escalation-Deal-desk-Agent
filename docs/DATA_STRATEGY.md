@@ -4,9 +4,25 @@ Use a coherent fictional B2B service-provider dataset that supports the entire b
 
 ## Existing seed
 
-`work_assistant/data/workspace.json` defines two tenants, their employees/teams, customer evidence groupings, and eight bilingual documents. Northstar's fictional Acme account has SLA terms, incident INC-104 history, an engineering runbook, private investigator notes, a renewal request, and a restricted credit-review policy. Another tenant supplies an isolation test case. The guide is shared within Northstar.
+`work_assistant/data/workspace.json` defines two tenants, their employees/teams, customer evidence groupings, and bilingual policy and evidence documents. Northstar's fictional Acme account has SLA terms, incident INC-104 history, an engineering runbook, private investigator notes, a renewal request, and a restricted credit-review policy. Another tenant supplies an isolation test case. The guide is shared within Northstar.
 
 These documents are **development evidence**, not live CRM rows, complete signed contracts, or an oracle proving a credit is owed. The incident's end time and root cause remain unknown; the proposed discount is unapproved. Preserve that uncertainty in answers and generated artifacts.
+
+## Customer account exercises
+
+The November 2026 exercises pair one incident and one renewal per fictional customer. Each account has its own contract and renewal pricing record. The records live in `work_assistant/data/account_reviews.json` and their supporting documents in `work_assistant/data/workspace.json`. The following public materials informed the scenarios.
+
+- Larkspur’s session failures draw on the distinction between cached and uncached reads in Cloudflare’s June 12, 2025 outage. The dispatcher impact and all timestamps in the exercise are invented. [Cloudflare incident report](https://blog.cloudflare.com/cloudflare-service-outage-june-12-2025/)
+- The SLA exercises use the idea of reconciling a claim with time windows, affected service scope and logs. The project uses its own fictional per-minute credit schedule. [Amazon Compute SLA](https://aws.amazon.com/compute/sla/)
+- The renewal exercises adapt the handbook’s examples of discount approval and temporary migration coverage. All buyers, prices, cost attestations and approval thresholds in the exercises are fictional. [GitLab Deal Desk Handbook](https://handbook.gitlab.com/handbook/sales/field-operations/sales-operations/deal-desk/)
+
+**Check your work on fresh records**
+
+| Account | Incident | Renewal |
+| --- | --- | --- |
+| Larkspur | First response took 12 minutes. Of 140 minutes of impact, 20 are excluded. The USD 720 calculation reaches the USD 600 monthly cap. | USD 10,800/month at 10% off, with 33.33% gross margin. Ready for review. |
+| Bracken | First response took 38 minutes against a 30-minute target. The claim pauses until BM-72 supplies the missing facts. After entry, 48 eligible minutes yield USD 192. | The requested 25% exceeds the 20% limit and falls below the 25% margin floor. The buyer’s 12% fallback gives USD 7,040/month and 26.14% margin. |
+| Merefield | The hosted endpoint accepted every manifest. Confirmed ineligibility gives USD 0 despite 47 minutes of customer impact. | The review pauses for cost attestation. After Lin records USD 3,000/month from MP-88, the six-month term at USD 4,750/month gives 36.84% margin. |
 
 ## Typed Unit 5 seed
 

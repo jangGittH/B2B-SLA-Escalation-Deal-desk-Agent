@@ -31,6 +31,18 @@ uv run python -m work_assistant demo --ephemeral
 
 The seed contains fictional Acme SLA terms, incident INC-104 evidence, a renewal-discount request, and a restricted credit-review policy. Typed INC-104 inputs deliberately remain incomplete; INC-105 demonstrates a USD 45.00 unexecuted credit proposal from fully specified fictional inputs. Sample policies are development data, not real contract or financial guidance. [Data strategy](docs/DATA_STRATEGY.md).
 
+## Work a customer account
+
+In the local PostgreSQL demo, switch employees using the profile at the bottom of the sidebar. **Mei Chen** investigates incidents in **SLA cases**, **Alex Wang** owns renewals in **Deal desk**, and **Lin Zhao** is the Operations reviewer who approves proposals and confirms costs. Search **Policies & evidence** for the referenced handoff. These fictional accounts share a November 2026 review date.
+
+| Customer | Escalation to handle as Mei | Renewal to handle as Alex |
+| --- | --- | --- |
+| Larkspur Freight | **INC-201**. Explain how the maintenance exclusion and monthly cap affect the dispatch outage claim. Check the signed schedule LF-26 before sending the proposal to Lin. | **DEAL-201**. Prepare a one-year renewal at the requested 10% discount. Keep the incident credit separate from recurring fees. |
+| Bracken Market | **INC-202**. The alert cleared while stores still saw errors. Read handoff BM-72, record the confirmed end time and eligibility, then resume the review. | **DEAL-202**. Check the competitor match against discount and margin limits. Use the buyer’s fallback in BM-72 to revise the request. |
+| Merefield Press | **INC-203**. Read the receipt log summary and draft a response to the publisher explaining the missed cutoff and coverage decision. | **DEAL-203**. Start the six-month bridge review. As Lin, find MP-88 and attest the monthly cost in the deal. As Alex, resume the review for independent approval. |
+
+On an existing installation, rerun `uv run python -m work_assistant db-init` and rebuild the web app to load the new records and sidebar. Seed runs preserve saved edits and decisions. [Scenario sources and expected results](docs/DATA_STRATEGY.md#customer-account-exercises)
+
 ## Try the SLA workflow
 
 1. As **Mei Chen**, open **SLA cases → INC-105 → Start SLA review**.

@@ -340,7 +340,7 @@ def test_exact_case_counts_are_tenant_scoped_uncapped_and_fresh(database):
     initial=gateway.execute('count_workspace_cases',{})
     assert initial['ok']
     data=json.loads(initial['document']['content'])
-    assert data['sla_cases']==2 and data['deal_requests']==2 and data['combined_records']==4
+    assert data['sla_cases']==5 and data['deal_requests']==5 and data['combined_records']==10
     outside=json.loads(ToolGateway(knowledge,'outsider','en').execute('count_workspace_cases',{})['document']['content'])
     assert outside['sla_cases']==1 and outside['deal_requests']==1
     assert not gateway.execute('count_workspace_cases',{'employee_id':'outsider'})['ok']
@@ -348,7 +348,7 @@ def test_exact_case_counts_are_tenant_scoped_uncapped_and_fresh(database):
         template=dict(c.execute(select(tickets).where(tickets.c.organization_id=='northstar')).mappings().first())
         c.execute(insert(tickets),[template|{'id':f'INC-COUNT-{i}'} for i in range(110)])
     changed=json.loads(gateway.execute('count_workspace_cases',{})['document']['content'])
-    assert changed['sla_cases']==112 and changed['combined_records']==114
+    assert changed['sla_cases']==115 and changed['combined_records']==120
     with pytest.raises(EvidenceChanged):
         current_sources(knowledge,'mei',{'case-summary':knowledge.read('mei','case-summary','en').model_copy(update={'content':initial['document']['content']})})
 
@@ -375,7 +375,7 @@ def test_count_plan_uses_aggregate_evidence_without_specific_case(database,mode)
     result=asyncio.run(CollaborationAgent(KnowledgeService(database),Counting()).ask(
         'mei',AgentRequest(question='how many cases do we have now',mode=mode)))
     assert result.status=='answered',result
-    assert '2 SLA cases' in result.answer and result.sources[0].id=='case-summary'
+    assert '5 SLA cases' in result.answer and result.sources[0].id=='case-summary'
     assert result.tool_calls==1 and result.verification
 
 
@@ -403,7 +403,7 @@ def test_accepted_read_offer_resolves_task_and_reads_without_mutation(database,m
                 if not payload['observations']:return self.tool('list_deals',{})
                 if len(payload['observations'])==1:return self.tool('get_deal',{'deal_id':payload['observations'][0]['result']['deals'][0]['id']})
                 doc=payload['observations'][0]['result']['document']
-                return StructuredReply({'result':{'source_ids':[doc['id']],'claims':[{'text':'There are 2 deal requests in this organization.',
+                return StructuredReply({'result':{'source_ids':[doc['id']],'claims':[{'text':'There are 5 deal requests in this organization.',
                     'evidence':[{'source_id':doc['id'],'version':doc['version'],'quote':doc['content']}]}]}})
             return await super().structured(role,payload,*args)
     history=[{'question':"What's a deal request?",'answer':'Would you like to review the details of the existing deal requests?'}]
@@ -420,7 +420,7 @@ def test_listing_provenance_is_scoped_and_detects_changed_records(database):
     knowledge=KnowledgeService(database);gateway=ToolGateway(knowledge,'mei','en')
     listing=gateway.execute('list_deals',{})
     assert listing['ok'] and listing['document']['id']=='deal-list'
-    assert {r['id'] for r in listing['deals']}=={'DEAL-101','DEAL-102'}
+    assert {r['id'] for r in listing['deals']}=={'DEAL-101','DEAL-102','DEAL-201','DEAL-202','DEAL-203'}
     assert 'DEAL-101' not in ToolGateway(knowledge,'outsider','en').execute('list_deals',{})['document']['content']
     with database.engine.begin() as c:c.execute(update(requests).where(requests.c.organization_id=='northstar',requests.c.id=='DEAL-101').values(title='Changed title',version=2))
     with pytest.raises(EvidenceChanged):current_sources(knowledge,'mei',gateway.evidence)

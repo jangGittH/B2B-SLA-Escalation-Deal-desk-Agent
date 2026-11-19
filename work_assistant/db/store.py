@@ -59,6 +59,8 @@ class Database:
             seed(connection, workspace)
             from ..deals.seed import seed as seed_deals
             seed_deals(connection, workspace)
+            from .practice_seed import seed as seed_practice
+            seed_practice(connection, workspace)
 
     def _record(self, table, record_id, model):
         with self.engine.connect() as connection:

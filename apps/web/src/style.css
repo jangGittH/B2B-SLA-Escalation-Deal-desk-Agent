@@ -115,6 +115,27 @@ button:hover:not(:disabled) {
   flex-direction: column;
   z-index: 30;
 }
+.sidebar[hidden],
+.sidebar-opener[hidden] {
+  display: none;
+}
+.sidebar[hidden] ~ .workspace-main {
+  margin-left: 0;
+}
+.sidebar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-heading .brand {
+  padding: 0;
+}
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 29;
+  background: #17233c45;
+}
 .brand {
   display: flex;
   align-items: center;
@@ -849,9 +870,6 @@ button:hover:not(:disabled) {
 }
 .icon-button:hover {
   background: #eef0f6;
-}
-.mobile-menu {
-  display: none;
 }
 .primary-button {
   background: #596bdf;
@@ -1619,12 +1637,7 @@ button:hover:not(:disabled) {
 }
 @media (max-width: 760px) {
   .sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.2s;
     box-shadow: 10px 0 30px #24314c15;
-  }
-  .sidebar.open {
-    transform: translateX(0);
   }
   .workspace-main {
     margin-left: 0;
@@ -1633,9 +1646,6 @@ button:hover:not(:disabled) {
     padding: 0 19px;
     height: 62px;
     gap: 9px;
-  }
-  .mobile-menu {
-    display: grid;
   }
   .breadcrumb {
     gap: 8px;

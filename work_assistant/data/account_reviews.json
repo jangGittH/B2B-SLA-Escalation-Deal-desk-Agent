@@ -1,0 +1,53 @@
+[
+  {
+    "account_id": "larkspur", "name": "Larkspur Freight", "contact_name": "Nora Vale",
+    "monthly_fee": "12000.00", "monthly_cost": "7200.00",
+    "cost_evidence": "Finance allocation LF-11 covers routing compute, support and storage for the current dispatch volume.",
+    "ticket": {
+      "id": "INC-201", "title": "Larkspur Freight · Dispatchers could not open new sessions",
+      "reported_at": "2026-11-12T08:05:00Z", "first_response_at": "2026-11-12T08:17:00Z",
+      "incident_started_at": "2026-11-12T08:00:00Z", "incident_ended_at": "2026-11-12T10:20:00Z",
+      "exclusions": [{"start": "2026-11-12T08:00:00Z", "end": "2026-11-12T08:20:00Z"}],
+      "eligibility_confirmed": true, "updated_at": "2026-11-16T14:10:00Z",
+      "evidence_note": "Nora counted 46 dispatchers unable to sign in at shift change. Existing sessions continued to process loads. Identity traces LF-411 show uncached routing lookups failing from 08:00 to 10:20 UTC. Change notice CH-82 covers the first 20 minutes. Support confirmed the remaining window qualifies and Finance found no earlier November credit. Nora wants the invoice impact before her renewal call."
+    },
+    "deal": {
+      "id": "DEAL-201", "title": "Larkspur Freight · Hold dispatch pricing for the annual renewal",
+      "requested_discount": "0.10", "renewal_end": "2028-01-01T00:00:00Z", "updated_at": "2026-11-17T09:00:00Z",
+      "evidence_note": "Nora will take a one-year extension at a 10% discount to the purchasing committee on Nov 20. Fleet size and dispatch coverage stay flat. The proposed recurring fee excludes the one-time incident credit being reviewed under INC-201. Prepare a monthly quote and the margin for Lin before the committee meets."
+    }
+  },
+  {
+    "account_id": "bracken", "name": "Bracken Market", "contact_name": "Inez Park",
+    "monthly_fee": "8000.00", "monthly_cost": "5200.00",
+    "cost_evidence": "Finance worksheet BM-19 includes checkout traffic and the contracted peak-season support rotation.",
+    "ticket": {
+      "id": "INC-202", "title": "Bracken Market · Checkout retries during the evening sale",
+      "reported_at": "2026-11-14T18:03:00Z", "first_response_at": "2026-11-14T18:41:00Z",
+      "incident_started_at": "2026-11-14T18:00:00Z", "exclusions": [],
+      "updated_at": "2026-11-15T08:10:00Z",
+      "evidence_note": "Inez reported abandoned baskets after authorization retries on the EU checkout gateway. The alert cleared at 18:25 UTC, but two stores still reported failures. Support confirmed there was no maintenance. Finance found no prior November credit. Check the reconciliation handoff BM-72 in Policies & evidence before recording the impact end and eligibility."
+    },
+    "deal": {
+      "id": "DEAL-202", "title": "Bracken Market · Match a competing checkout quote",
+      "requested_discount": "0.25", "renewal_end": "2028-01-01T00:00:00Z", "updated_at": "2026-11-17T11:30:00Z",
+      "evidence_note": "Procurement wants 25% off for twelve months after a competitor bid USD 6,000 per month. Bracken still requires peak-season support. Inez can take a revised quote to the Nov 23 committee. Compare the bid to the cost floor and use her written fallback in BM-72 if the original request fails policy."
+    }
+  },
+  {
+    "account_id": "merefield", "name": "Merefield Press", "contact_name": "Theo Moss",
+    "monthly_fee": "5000.00", "monthly_cost": null, "cost_evidence": "",
+    "ticket": {
+      "id": "INC-203", "title": "Merefield Press · Print manifests stalled at the client gateway",
+      "reported_at": "2026-11-16T04:10:00Z", "first_response_at": "2026-11-16T04:17:00Z",
+      "incident_started_at": "2026-11-16T04:08:00Z", "incident_ended_at": "2026-11-16T04:55:00Z",
+      "exclusions": [], "eligibility_confirmed": false, "updated_at": "2026-11-16T12:30:00Z",
+      "evidence_note": "Theo requested a credit after 14 print manifests missed the depot cutoff. Receipt log MP-41 shows the hosted endpoint accepted all 14. The publisher's gateway held the files until its expired signing certificate was replaced. Theo confirmed delivery at 04:55 UTC. Operations classified the incident as outside hosted-service coverage. Finance confirmed no previous November credit. Draft a reply explaining the finding and acknowledging the missed cutoff."
+    },
+    "deal": {
+      "id": "DEAL-203", "title": "Merefield Press · Six-month bridge through the archive migration",
+      "requested_discount": "0.05", "renewal_end": "2027-07-01T00:00:00Z", "updated_at": "2026-11-17T13:05:00Z",
+      "evidence_note": "Theo needs six extra months of archive access while regional titles move to a new platform. He requested 5% off and a quote by Nov 24. The delivery estimate includes read-only storage and weekend support. Finance has sent its cost worksheet MP-88 to Operations, but the renewal pricing record still needs an attested cost."
+    }
+  }
+]

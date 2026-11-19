@@ -251,8 +251,10 @@ def test_showcase(database,tmp_path,monkeypatch,record_property,mode,category,ca
             receipt=c.execute(select(w.receipts).where(w.receipts.c.workflow_id==wid)).mappings().one()
             assert receipt['payload_hash']==digest(receipt['payload'])
             if deal:
-                assert c.execute(select(d.sandbox_contracts.c.monthly_fee).where(d.sandbox_contracts.c.organization_id=='northstar')).scalar_one()==Decimal(expected)
-                assert c.execute(select(s.contracts.c.monthly_fee).where(s.contracts.c.organization_id=='northstar')).scalar_one()==Decimal('1000')
+                assert c.execute(select(d.sandbox_contracts.c.monthly_fee).where(
+                    d.sandbox_contracts.c.organization_id=='northstar', d.sandbox_contracts.c.id==approval['payload']['contract_id'])).scalar_one()==Decimal(expected)
+                assert c.execute(select(s.contracts.c.monthly_fee).where(
+                    s.contracts.c.organization_id=='northstar', s.contracts.c.id==approval['payload']['contract_id'])).scalar_one()==Decimal('1000')
     if case=='memory_stale':
         saved=memory.propose(actor,Proposal(kind='episode',source_id='workflow:'+wid));memory.change(actor,saved['id'],Change(expected_version=1,action='confirm'))
         assert memory.recall(actor)

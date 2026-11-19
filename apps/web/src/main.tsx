@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowUp,
@@ -93,8 +93,31 @@ function App() {
     localStorage.getItem("northstar-language") === "zh" ? "zh" : "en",
   );
   const t = (en: string, zh: string) => (lang === "zh" ? zh : en);
-  const [page, setPage] = useState<Page>("assistant"),
-    [nav, setNav] = useState(false);
+  const [page, setPage] = useState<Page>("assistant");
+  const [mobileNav, setMobileNav] = useState(() => window.matchMedia("(max-width: 760px)").matches);
+  const [nav, setNav] = useState(!mobileNav);
+  const navOpener = useRef<HTMLButtonElement>(null);
+  const navCloser = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 760px)");
+    function resize() {
+      setMobileNav(media.matches);
+      setNav(!media.matches);
+    }
+    media.addEventListener("change", resize);
+    return () => media.removeEventListener("change", resize);
+  }, []);
+  const focusNavControl = useRef(false);
+  useLayoutEffect(() => {
+    if (focusNavControl.current) {
+      (nav ? navCloser : navOpener).current?.focus();
+      focusNavControl.current = false;
+    }
+  }, [nav]);
+  function toggleNav(open: boolean) {
+    focusNavControl.current = true;
+    setNav(open);
+  }
   const [config, setConfig] = useState<{
     demo_mode: boolean;
     employees: Employee[];
@@ -354,7 +377,7 @@ function App() {
   }, [workspace?.identity.id, workspace?.persistence_available]);
   function go(next: Page) {
     setPage(next);
-    setNav(false);
+    if (mobileNav && nav) toggleNav(false);
     setError("");
   }
   async function ask(value = question) {
@@ -625,15 +648,35 @@ function App() {
   );
   return (
     <div className="app-shell">
-      <aside className={`sidebar ${nav ? "open" : ""}`}>
-        <a className="brand" href="/" aria-label="B2B SLA Escalation/Deal desk Agent home">
-          <span className="brand-mark">
-            <Sparkles size={23} />
-          </span>
-          <span>
-            B2B SLA<span className="brand-sub">Escalation/Deal desk Agent</span>
-          </span>
-        </a>
+      <aside
+        id="workspace-sidebar"
+        className="sidebar"
+        hidden={!nav}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") toggleNav(false);
+        }}
+      >
+        <div className="sidebar-heading">
+          <a className="brand" href="/" aria-label="B2B SLA Escalation/Deal desk Agent home">
+            <span className="brand-mark">
+              <Sparkles size={23} />
+            </span>
+            <span>
+              B2B SLA<span className="brand-sub">Escalation/Deal desk Agent</span>
+            </span>
+          </a>
+          <button
+            ref={navCloser}
+            className="icon-button"
+            aria-label={t("Close sidebar", "关闭侧边栏")}
+            title={t("Close sidebar", "关闭侧边栏")}
+            aria-controls="workspace-sidebar"
+            aria-expanded={nav}
+            onClick={() => toggleNav(false)}
+          >
+            <PanelLeftClose size={19} />
+          </button>
+        </div>
         <button className="workspace-switch" onClick={() => setLogin(true)}>
           <span className="org-avatar">
             {workspace?.identity.organization_id === "otherco" ? "O" : "N"}
@@ -703,15 +746,21 @@ function App() {
           </button>
         </div>
       </aside>
-      <div className="workspace-main">
+      {mobileNav && nav && <div className="sidebar-backdrop" onClick={() => toggleNav(false)} />}
+      <div className="workspace-main" inert={mobileNav && nav}>
         <header className="topbar">
           <div className="breadcrumb">
             <button
-              className="icon-button mobile-menu"
-              aria-label="Toggle navigation"
-              onClick={() => setNav(!nav)}
+              ref={navOpener}
+              hidden={nav}
+              className="icon-button sidebar-opener"
+              aria-label={t("Open sidebar", "打开侧边栏")}
+              title={t("Open sidebar", "打开侧边栏")}
+              aria-controls="workspace-sidebar"
+              aria-expanded={nav}
+              onClick={() => toggleNav(true)}
             >
-              {nav ? <PanelLeftClose size={19} /> : <PanelLeftOpen size={19} />}
+              <PanelLeftOpen size={19} />
             </button>
             <span>{t("Workspace", "工作空间")}</span>
             <ChevronRight size={13} />

@@ -128,6 +128,30 @@
         "en": "Other customer account",
         "zh": "另一客户档案"
       }
+    },
+    {
+      "id": "larkspur",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Larkspur Freight",
+        "zh": "Larkspur 货运"
+      }
+    },
+    {
+      "id": "bracken",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Bracken Market",
+        "zh": "Bracken 零售"
+      }
+    },
+    {
+      "id": "merefield",
+      "organization_id": "northstar",
+      "name": {
+        "en": "Merefield Press",
+        "zh": "Merefield 出版社"
+      }
     }
   ],
   "documents": [
@@ -281,6 +305,62 @@
       "updated_at": "2026-11-15T01:00:00Z",
       "visibility": "organization",
       "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "larkspur-sla",
+      "organization_id": "northstar",
+      "project_id": "larkspur",
+      "title": {
+        "en": "Larkspur Freight · Dispatch service schedule",
+        "zh": "Larkspur 货运 · 调度服务条款"
+      },
+      "content": {
+        "en": "Fictional signed schedule LF-26. P1 dispatch incidents have a 30-minute first-response target. Eligible downtime accrues a credit of 0.05% of the USD 12,000 monthly fee per minute, capped at 5% each UTC calendar month. Approved maintenance is excluded. Record any credit separately from the renewal quote.",
+        "zh": "虚构合同 LF-26。P1 调度故障须在 30 分钟内首次响应。每个符合条件的停机分钟按 12,000 美元月费的 0.05% 计算补偿，每个 UTC 自然月上限为月费的 5%。已批准的维护时段不计入。补偿与续约报价分别记录。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-17T14:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "inc-202-history",
+      "organization_id": "northstar",
+      "project_id": "bracken",
+      "title": {
+        "en": "Bracken Market · BM-72 reconciliation handoff",
+        "zh": "Bracken 零售 · BM-72 核查交接"
+      },
+      "content": {
+        "en": "Nov 16 follow-up for INC-202. Both stores matched their last failed checkout to the provider trace. Normal approvals resumed Nov 14 at 18:48 UTC. Operations confirmed the full 48-minute incident qualifies. For DEAL-202, Inez separately authorized a fallback request of 12% off for one year with peak-season support included. Internal approval is pending.",
+        "zh": "11 月 16 日关于 INC-202 的跟进：两家门店最后一笔失败交易均与服务商日志吻合。11 月 14 日 18:48 UTC 恢复正常审批。运营确认 48 分钟均符合补偿条件。对于 DEAL-202，Inez 同意备选方案为续约一年、折扣 12%，含旺季支持，待内部审批。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-17T14:00:00Z",
+      "visibility": "organization",
+      "reader_team_ids": [],
+      "reader_employee_ids": []
+    },
+    {
+      "id": "merefield-deal",
+      "organization_id": "northstar",
+      "project_id": "merefield",
+      "title": {
+        "en": "Merefield Press · MP-88 archive cost worksheet",
+        "zh": "Merefield 出版社 · MP-88 归档成本表"
+      },
+      "content": {
+        "en": "Fictional Finance handoff MP-88, Nov 17. For DEAL-203 the six-month bridge requires USD 2,150 per month for storage and retrieval plus USD 850 per month for weekend support. Finance confirmed the total recurring delivery cost of USD 3,000 per month for this term. Lin can cite MP-88 when recording the cost attestation.",
+        "zh": "虚构财务交接单 MP-88，11 月 17 日。DEAL-203 过渡期为六个月。每月存储和检索成本为 2,150 美元，周末支持成本为 850 美元。财务已确认本期每月总交付成本为 3,000 美元。赵林可引用 MP-88 更新成本确认。"
+      },
+      "version": 1,
+      "updated_at": "2026-11-17T14:00:00Z",
+      "visibility": "restricted",
+      "reader_team_ids": [
+        "operations"
+      ],
       "reader_employee_ids": []
     }
   ]

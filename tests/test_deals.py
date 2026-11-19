@@ -54,8 +54,10 @@ def test_approved_renewal_exact_contract_memo_receipt_and_sla_unchanged(database
     assert final['status']=='completed' and final['outcome']['verified']
     assert final['outcome']['contract_version']==2 and not final['outcome']['real_crm_updated']
     with database.engine.connect() as c:
-        contract=c.execute(select(t.sandbox_contracts).where(t.sandbox_contracts.c.organization_id=='northstar')).mappings().one()
-        source=c.execute(select(sla.contracts).where(sla.contracts.c.organization_id=='northstar')).mappings().one()
+        contract=c.execute(select(t.sandbox_contracts).where(
+                    t.sandbox_contracts.c.organization_id=='northstar', t.sandbox_contracts.c.id==before['approval']['payload']['contract_id'])).mappings().one()
+        source=c.execute(select(sla.contracts).where(
+                    sla.contracts.c.organization_id=='northstar', sla.contracts.c.id==before['approval']['payload']['contract_id'])).mappings().one()
     assert contract['monthly_fee']==Decimal('900') and contract['ends_at'].year==2028
     assert source['monthly_fee']==Decimal('1000') and source['version']==1 and source['ends_at'].year==2027
     assert count(database)==1
@@ -210,7 +212,8 @@ def test_http_deal_review_schema_and_restart(database):
     owner={'Authorization':'Bearer alex'};reviewer={'Authorization':'Bearer lin'}
     with TestClient(app()) as c:
         assert c.get('/v1/deals').status_code==401
-        assert len(c.get('/v1/deals',headers=owner).json()['deals'])==2
+        assert {d['id'] for d in c.get('/v1/deals', headers=owner).json()['deals']} == {
+            'DEAL-101', 'DEAL-102', 'DEAL-201', 'DEAL-202', 'DEAL-203'}
         response=c.post('/v1/deal-workflows',headers=owner,json={'deal_id':'DEAL-101','expected_deal_version':1,'request_key':'http'})
         assert response.status_code==202,response.text
         w=response.json()['id']
@@ -289,3 +292,27 @@ def test_conversation_tools_bind_deal_workflow_and_do_not_approve(database,tmp_p
     gateway=ToolGateway(KnowledgeService(database),'alex','en')
     assert gateway.execute('update_contract',{})['error']['code']=='APPROVAL_REQUIRED'
     assert gateway.execute('get_deal',{'deal_id':'OTHER-DEAL'})['error']['code']=='NOT_FOUND'
+
+
+def test_account_renewals_reach_review_with_customer_and_finance_handoffs(database):
+    service, wid = start(database, 'DEAL-201', 'larkspur')
+    assert service.get('lin', wid)['approval']['payload']['amount'] == '10800.00'
+
+    service, wid = start(database, 'DEAL-202', 'bracken')
+    row = service.get('alex', wid)
+    assert set(row['missing_inputs']) == {'discount_exceeds_policy', 'margin_below_policy'}
+    deal = service.records.detail('alex', 'DEAL-202')['deal']
+    service.records.edit('alex', deal['id'], edits(deal, requested_discount='0.12', change_reason='Buyer fallback BM-72'))
+    service.resume('alex', wid, row['version'])
+    WorkflowEngine(service).drive(wid)
+    assert service.get('lin', wid)['approval']['payload']['amount'] == '7040.00'
+
+    service, wid = start(database, 'DEAL-203', 'merefield')
+    row = service.get('alex', wid)
+    assert row['missing_inputs'] == ['confirmed_policy_cost']
+    service.records.edit_cost('lin', 'merefield-renewal', EditCost(
+        expected_version=1, monthly_cost='3000', cost_evidence='Finance worksheet MP-88',
+        change_reason='Attest delivery cost for the six-month bridge'))
+    service.resume('alex', wid, row['version'])
+    WorkflowEngine(service).drive(wid)
+    assert service.get('lin', wid)['approval']['payload']['amount'] == '4750.00'

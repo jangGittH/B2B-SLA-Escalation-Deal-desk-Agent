@@ -24,7 +24,8 @@ def edit_body(ticket, **changes):
 def test_case_queries_access_edit_restart_and_conflict(database):
     with TestClient(app(database)) as client:
         assert client.get('/v1/cases').status_code == 401
-        assert len(client.get('/v1/cases', headers=HEADERS).json()['tickets']) == 2
+        assert {t['id'] for t in client.get('/v1/cases', headers=HEADERS).json()['tickets']} == {
+            'INC-104', 'INC-105', 'INC-201', 'INC-202', 'INC-203'}
         assert client.get('/v1/cases?query=%25', headers=HEADERS).json()['tickets'] == []
         assert client.get('/v1/cases?account_id=other-account', headers=HEADERS).json()['tickets'] == []
         assert client.get('/v1/cases/INC-105', headers={'Authorization':'Bearer outside'}).status_code == 404
@@ -167,3 +168,21 @@ def test_artifact_creation_cannot_launder_uncited_business_claims(tmp_path):
     with TestClient(create_app({'mei':'mei'}, model_factory=lambda:model, artifact_root=tmp_path)) as client:
         result = client.post('/v1/agent/ask', headers=HEADERS, json={'question':'Make a note'}).json()
         assert result['answer'] == 'Created files: notes.md'
+
+
+def test_account_exercises_distinguish_response_and_credit(database):
+    cases = SlaService(database)
+    larkspur = cases.detail('mei', 'INC-201')['calculation']
+    assert (larkspur['response_status'], larkspur['eligible_minutes'], larkspur['proposal_amount']) == (
+        'met', '120', '600.00')
+    merefield = cases.detail('mei', 'INC-203')['calculation']
+    assert (merefield['reason'], merefield['proposal_amount']) == ('confirmed_ineligible', '0.00')
+
+    bracken = cases.detail('mei', 'INC-202')
+    assert bracken['calculation']['response_status'] == 'breached'
+    assert set(bracken['calculation']['missing_inputs']) == {'incident_ended_at', 'eligibility_confirmed'}
+    cases.edit_ticket('mei', 'INC-202', EditTicket(**edit_body(
+        bracken['ticket'], incident_ended_at='2026-11-14T18:48:00Z', eligibility_confirmed=True,
+        change_reason='BM-72 reconciles the EU store receipts')))
+    database.seed(FixtureRepository.load().workspace)
+    assert cases.detail('mei', 'INC-202')['calculation']['proposal_amount'] == '192.00'

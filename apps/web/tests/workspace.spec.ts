@@ -78,7 +78,7 @@ test("search, Chinese language and mobile layout", async ({ page }) => {
   await page.getByRole("button", { name: "搜索", exact: true }).click();
   await expect(page.getByRole("heading", { name: "未找到文档" })).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Toggle navigation" }).click();
+  await page.getByRole("button", { name: "打开侧边栏" }).click();
   await page.getByRole("button", { name: "案例助手 AI", exact: true }).click();
   await page.screenshot({ path: "/tmp/northstar-mobile.png", fullPage: true });
   expect(
@@ -249,4 +249,30 @@ test("generated attachment downloads using employee credentials", async ({
   await page.getByRole("button", { name: /Download notes.md/ }).click();
   expect((await download).suggestedFilename()).toBe("notes.md");
   expect(authenticated).toBe(true);
+});
+
+test("sidebar closes and reopens without losing the selected page", async ({ page }) => {
+  await page.goto("/");
+  const sidebar = page.locator("#workspace-sidebar");
+  const close = page.getByRole("button", { name: "Close sidebar" });
+  const open = page.getByRole("button", { name: "Open sidebar" });
+  await page.locator("nav .nav-item").filter({ hasText: "SLA cases" }).click();
+  await close.click();
+  await expect(sidebar).toBeHidden();
+  await expect(open).toBeFocused();
+  await expect(page.locator(".workspace-main")).toHaveCSS("margin-left", "0px");
+  await open.click();
+  await expect(close).toBeFocused();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(sidebar).toBeHidden();
+  await open.click();
+  await close.click();
+  await expect(open).toBeFocused();
+  await open.click();
+  await page.keyboard.press("Escape");
+  await expect(open).toBeFocused();
+  await open.click();
+  await page.locator(".sidebar-backdrop").click({ position: { x: 360, y: 200 } });
+  await expect(sidebar).toBeHidden();
+  await expect(page.locator(".breadcrumb")).toContainText("SLA cases");
 });
