@@ -17,7 +17,8 @@ class Contract(BaseModel):
     model_config = ConfigDict(extra='forbid', str_strip_whitespace=True)
 
 class Intake(Contract):
-    route: Literal['investigate', 'conversation', 'clarify', 'recall_question']
+    route: Literal['investigate', 'conversation', 'clarify', 'recall_question', 'restate_answer']
+    response_language: Literal['zh', 'en'] | None = Field(default=None, description='Output language explicitly requested in this message, otherwise null.')
     reply: str = Field(default='', max_length=2000)
     resolved_request: str = Field(default='', max_length=2000, description='Explicit task resolved from the latest message and recent context; never invent scope or approval.')
 
@@ -25,7 +26,7 @@ class Intake(Contract):
     def reply_for_conversation(self):
         if self.route in ('conversation','clarify') and not self.reply:
             raise ValueError('A conversational reply or clarification question is required')
-        if self.route in ('investigate','recall_question') and self.reply:
+        if self.route in ('investigate','recall_question','restate_answer') and self.reply:
             raise ValueError('Do not generate a reply for investigation or question recall')
         return self
 

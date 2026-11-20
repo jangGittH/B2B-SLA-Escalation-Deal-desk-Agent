@@ -97,6 +97,7 @@ class Session:
         self.previous_question=history[-1]['question'] if history else None
         self.resolved_question=request.question
         self.verification=None;self.memory=[]
+        self.restating = False
 
     async def model(self,role,payload,schema,node_id):
         actor=self.knowledge._actor(self.actor)
@@ -196,6 +197,8 @@ class Session:
 
     async def tool(self,node,role,gateway,call):
         self.budget.tool();self.knowledge._actor(self.actor)
+        if self.restating and TOOL_RISK.get(call.name) != 0:
+            raise Denied('Restating an answer only permits reads')
         if call.name not in ROLE_TOOLS[role] or (role!='single' and call.name not in node.tools):
             if TOOL_RISK.get(call.name)==0:
                 self.budget.repair()
@@ -252,6 +255,8 @@ class Session:
         gateway=ToolGateway(self.knowledge,self.actor,self.request.language,self.agent.files)
         gateway.evidence.update(inherited)
         tools=ROLE_TOOLS[role] if role=='single' else set(node.tools)
+        if self.restating:
+            tools = {name for name in tools if TOOL_RISK[name] == 0}
         payload={'question':self.resolved_question,'original_message':self.request.question,'history':self.history,'objective':node.objective,'handoffs':handoffs,
             'sources':[{'id':d.id,'version':d.version,'content':d.content[:5000],'truncated':len(d.content)>5000} for d in inherited.values()],
             'memories':self.memory,'tools':{name:SCHEMAS[name].model_json_schema() for name in sorted(tools)},
@@ -392,11 +397,16 @@ class Session:
             except InvalidOutput as exc:
                 self.budget.repair()
                 intake=await self.model('intake',intake_payload|{'feedback':str(exc)},Intake,'intake')
+            if intake.response_language:
+                self.request = self.request.model_copy(update={'language': intake.response_language})
+            self.restating = intake.route == 'restate_answer'
+            if self.restating and not self.history:
+                return self.response('needs_clarification', '请贴出需要改写的内容。' if self.request.language == 'zh' else 'Please share the text you want rephrased.')
             if intake.route=='recall_question':return self.recall_question()
             event('intake_routed',{'route':intake.route})
             self.resolved_question=intake.resolved_request or self.request.question
             self.task.data['resolved_request']=self.resolved_question
-            if intake.route!='investigate':
+            if intake.route not in ('investigate', 'restate_answer'):
                 check=await self.model('conversation_guard',intake_payload|{'reply':intake.reply},ConversationCheck,'conversation_guard')
                 event('conversation_checked',{'passed':check.safe})
                 if check.safe:

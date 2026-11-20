@@ -432,3 +432,24 @@ def test_percentage_display_conversion_preserves_numeric_gate():
     assert not validate_claims([Claim(text='The proposed discount is 10%.',evidence=[support])],{doc.id:doc})
     for text in ('The proposed discount is 30%.','The proposed amount is 10 USD.'):
         assert validate_claims([Claim(text=text,evidence=[support])],{doc.id:doc})
+
+
+@pytest.mark.parametrize('mode', ['single', 'supervisor'])
+def test_restate_uses_previous_topic_and_explicit_language(mode):
+    history = [{'question': 'What is the SLA response target?', 'answer': 'The response target is 60 minutes.'}]
+
+    class Restatement(CaseModel):
+        async def structured(self, role, payload, schema, language, output_tokens):
+            if role == 'intake':
+                assert language == 'en' and payload['history'] == history
+                return StructuredReply({'route': 'restate_answer', 'response_language': 'zh',
+                                        'resolved_request': '用中文复述 SLA 响应时限。'})
+            assert language == 'zh' and role != 'conversation_guard'
+            if role == 'single':
+                assert 'start_sla_workflow' not in payload['tools']
+            return await super().structured(role, payload, schema, language, output_tokens)
+
+    agent = CollaborationAgent(KnowledgeService(FixtureRepository.load()), Restatement())
+    result = asyncio.run(agent.ask('mei', AgentRequest(question='用中文说一遍', mode=mode), history))
+    assert result.status == 'answered' and result.verification and result.sources
+    assert all(call.risk_tier == 0 for call in result.tool_trace)
